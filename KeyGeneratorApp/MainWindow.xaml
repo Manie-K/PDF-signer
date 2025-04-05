@@ -3,10 +3,74 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:KeyGeneratorApp"
+        xmlns:local="clr-namespace:KeyGeneratorApp" d:DataContext="{d:DesignInstance Type=local:MainViewModel}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Key generation app" Height="450" Width="600">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <!-- PIN -->
+        <Label Content="Pin" Grid.Row="0" Grid.Column="0" Margin="10"
+               VerticalAlignment="Center" HorizontalAlignment="Right"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Margin="10"
+                 VerticalAlignment="Center" Width="100" 
+                 HorizontalAlignment="Left"
+                 Text="{Binding Pin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <!-- Output directory -->
+        <Label Content="Output directory" Grid.Row="1" Grid.Column="0" Margin="10"
+                VerticalAlignment="Center" HorizontalAlignment="Right"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="10"
+                 VerticalAlignment="Center" Width="100" 
+                 HorizontalAlignment="Left"
+                 Text="{Binding OutputDirectory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
+        <!-- Private key file name -->
+        <Label Content="Private key file name" Grid.Row="2" Grid.Column="0" Margin="10"
+                VerticalAlignment="Center" HorizontalAlignment="Right"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Margin="10"
+                 VerticalAlignment="Center" Width="100" 
+                 HorizontalAlignment="Left"
+                 Text="{Binding PrivateKeyFileName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <!-- Public key file name -->
+        <Label Content="Public key file name" Grid.Row="3" Grid.Column="0" Margin="10"
+                VerticalAlignment="Center" HorizontalAlignment="Right"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Margin="10"
+                 VerticalAlignment="Center" Width="100" 
+                 HorizontalAlignment="Left"
+                 Text="{Binding PublicKeyFileName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <!-- Generate button -->
+        <Button Content="Generate keys" Grid.ColumnSpan="2" Grid.Row="4" 
+                Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"
+                />
+
+        <!-- Messages -->
+        <TextBox Grid.Row="5" Grid.ColumnSpan="2" Margin="10"
+         VerticalAlignment="Center" Width="400" 
+         HorizontalAlignment="Center"
+            />
+        
+        <!-- Authors -->
+        <TextBlock Text="Auxillary application used for generating a key pair.
+                   Authors: Maciej Góralczyk, Franciszek Gwarek."
+                    Grid.Row="6" Grid.ColumnSpan="2" Margin="10"
+                    VerticalAlignment="Center" HorizontalAlignment="Center"
+                    Width="300" TextWrapping="Wrap"
+                    TextAlignment="Center" 
+                   FontSize="12"/>
+        
     </Grid>
 </Window>
