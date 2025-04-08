@@ -72,14 +72,12 @@
                 />
 
         <!-- Message -->
-        <TextBox Grid.Row="6" Grid.ColumnSpan="2" Margin="10"
+        <TextBox x:Name="MsgTextBox" Grid.Row="6" Grid.ColumnSpan="2" Margin="10"
          VerticalAlignment="Center" Width="400"
         HorizontalContentAlignment="Center"
          HorizontalAlignment="Center" Text="{Binding Message}"
-         IsReadOnly="True" BorderThickness="0"
-           Foreground="Red"
-            />
-        
+         IsReadOnly="True" BorderThickness="0"/>
+
         <!-- Authors -->
         <TextBlock Text="Auxillary application used for generating a key pair.
                    Authors: Maciej Góralczyk, Franciszek Gwarek."

@@ -2,17 +2,19 @@
 using System.IO;
 using System.Security.Cryptography;
 using System.Windows.Forms;
+using System.Windows.Media;
 
 namespace KeyGeneratorApp
 {
     internal class MainViewModel : ObservableObject
     {
         private const int PIN_LENGTH = 4;
-        
+        public event Action<System.Windows.Media.Brush> OnMessageColorChanged = default;
+
         private string _pin = "0000";
-        private string _outputPath = "./";
-        private string _privateKeyFileName = "privateKey";
-        private string _publicKeyFileName = "publicKey";
+        private string _outputPath = "";
+        private string _privateKeyFileName = "";
+        private string _publicKeyFileName = "";
         private string _msg = "";
 
         public RelayCommand GenerateKeysCommand { get; }
@@ -92,13 +94,6 @@ namespace KeyGeneratorApp
             GenerateKeysCommand = new RelayCommand(TryToGenerateKeys, () => true);
         }
 
-        private void TryToGenerateKeys()
-        {
-            if(IsDataValid())
-            {
-                GenerateKeys();
-            }
-        }
         public void SelectDirectory()
         {
             using (FolderBrowserDialog folderDialog = new FolderBrowserDialog())
@@ -115,9 +110,19 @@ namespace KeyGeneratorApp
             }
         }
 
+        
+        private void TryToGenerateKeys()
+        {
+            if(IsDataValid())
+            {
+                GenerateKeys();
+            }
+        }
+
         private bool IsDataValid()
         {
             //Pin
+            OnMessageColorChanged?.Invoke(new System.Windows.Media.SolidColorBrush(Colors.Red));
             if (String.IsNullOrEmpty(Pin))
             {
                 Message = "Pin cannot be empty";
@@ -155,6 +160,7 @@ namespace KeyGeneratorApp
                 return false;
             }
 
+            OnMessageColorChanged?.Invoke(new System.Windows.Media.SolidColorBrush(Colors.Green));
             Message = "";
             return true;
         }
@@ -176,6 +182,8 @@ namespace KeyGeneratorApp
                 Debug.WriteLine($"Private Key: {privateKey}");
                 Debug.WriteLine($"Encrypted Private Key: {encryptedPrivateKey}");
                 Debug.WriteLine($"Public Key: {publicKey}");
+
+                Message = "Keys generated successfully!";
 
                 try
                 {
