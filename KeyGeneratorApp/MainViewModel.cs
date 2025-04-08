@@ -175,14 +175,6 @@ namespace KeyGeneratorApp
 
                 byte[] encryptedPrivateKeyBytes = EncryptPrivateKey(privateKeyBytes);
 
-                string privateKey = Convert.ToBase64String(privateKeyBytes);
-                string encryptedPrivateKey = Convert.ToBase64String(encryptedPrivateKeyBytes);
-                string publicKey = Convert.ToBase64String(publicKeyBytes);
-
-                Debug.WriteLine($"Private Key: {privateKey}");
-                Debug.WriteLine($"Encrypted Private Key: {encryptedPrivateKey}");
-                Debug.WriteLine($"Public Key: {publicKey}");
-
                 Message = "Keys generated successfully!";
 
                 try
