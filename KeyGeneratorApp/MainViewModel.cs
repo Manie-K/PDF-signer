@@ -77,7 +77,8 @@ namespace KeyGeneratorApp
                 if (_msg != value)
                 {
                     _msg = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(Message));
+                    OnPropertyChanged(nameof(IsMessageValid));
                 }
             }
         }
@@ -88,9 +89,16 @@ namespace KeyGeneratorApp
 
         public MainViewModel()
         {
-            GenerateKeysCommand = new RelayCommand(GenerateKeys, IsDataValid);
+            GenerateKeysCommand = new RelayCommand(TryToGenerateKeys, () => true);
         }
 
+        private void TryToGenerateKeys()
+        {
+            if(IsDataValid())
+            {
+                GenerateKeys();
+            }
+        }
         public void SelectDirectory()
         {
             using (FolderBrowserDialog folderDialog = new FolderBrowserDialog())
@@ -112,42 +120,42 @@ namespace KeyGeneratorApp
             //Pin
             if (String.IsNullOrEmpty(Pin))
             {
-                _msg = "Pin cannot be empty";
+                Message = "Pin cannot be empty";
                 return false;
             }
             if (Pin.Length != PIN_LENGTH)
             {
-                _msg = "Pin must be 4 characters long";
+                Message = "Pin must be 4 characters long";
                 return false;
             }
             if (!Pin.All(char.IsDigit))
             {
-                _msg = "Pin must contain only digits";
+                Message = "Pin must contain only digits";
                 return false;
             }
 
             //Output directory
             if(String.IsNullOrEmpty(OutputDirectory))
             {
-                _msg = "Output directory must be selected";
+                Message = "Output directory must be selected";
                 return false;
             }
 
             //Private key name
             if (String.IsNullOrEmpty(PrivateKeyFileName))
             {
-                _msg = "Private key file name cannot be empty";
+                Message = "Private key file name cannot be empty";
                 return false;
             }
 
             //Public key name
             if (String.IsNullOrEmpty(PublicKeyFileName))
             {
-                _msg = "Public key file name cannot be empty";
+                Message = "Public key file name cannot be empty";
                 return false;
             }
 
-            _msg = "";
+            Message = "";
             return true;
         }
 
@@ -183,12 +191,15 @@ namespace KeyGeneratorApp
 
         private void SaveToFile(string fileName, byte[] content)
         {
+            fileName += ".bin";
             try
             {
                 File.WriteAllBytes(fileName, content);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Debug.WriteLine($"Error saving file {fileName}: {ex.Message}");
+                Message = $"Error saving file {fileName}: {ex.Message}";
             }
         }
 
