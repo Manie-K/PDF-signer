@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 
 namespace KeyGeneratorApp
 {
@@ -66,6 +67,48 @@ namespace KeyGeneratorApp
         public MainViewModel()
         {
 
+        }
+
+        void GenerateKeys(string pin)
+        {
+            using (RSA rsa = RSA.Create(4096))
+            {
+                byte[] privateKeyBytes = rsa.ExportPkcs8PrivateKey();
+                byte[] publicKeyBytes = rsa.ExportSubjectPublicKeyInfo();
+
+                byte[] encryptedPrivateKeyBytes = EncryptPrivateKey(pin, privateKeyBytes);
+
+                string privateKey = Convert.ToBase64String(privateKeyBytes);
+                string encryptedPrivateKey = Convert.ToBase64String(encryptedPrivateKeyBytes);
+                string publicKey = Convert.ToBase64String(publicKeyBytes);
+                Console.WriteLine($"Private Key: {privateKey}");
+                Console.WriteLine($"Encrypted Private Key: {encryptedPrivateKey}");
+                Console.WriteLine($"Public Key: {publicKey}");
+            }
+        }
+
+        byte[] EncryptPrivateKey(string pin, byte[] privateKeyBytes)
+        {
+            byte[] encryptedPrivateKey;
+
+            byte[] salt = RandomNumberGenerator.GetBytes(16);
+            byte[] iv = RandomNumberGenerator.GetBytes(16);
+
+            using (Aes aes = Aes.Create())
+            {
+                var pbkdf2 = new Rfc2898DeriveBytes(pin, salt, 100_000, HashAlgorithmName.SHA256);
+                var key = pbkdf2.GetBytes(aes.KeySize / 8);
+
+                aes.Key = key;
+                aes.IV = iv;
+
+                using (var encryptor = aes.CreateEncryptor())
+                {
+                    encryptedPrivateKey = encryptor.TransformFinalBlock(privateKeyBytes, 0, privateKeyBytes.Length);
+                }
+            }
+
+            return encryptedPrivateKey;
         }
     }
 }
