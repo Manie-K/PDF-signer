@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:KeyGeneratorApp" d:DataContext="{d:DesignInstance Type=local:MainViewModel}"
+        xmlns:local="clr-namespace:KeyGeneratorApp"
         mc:Ignorable="d"
         Title="Key generation app" Height="450" Width="600">
     <Window.Resources>
@@ -32,12 +32,10 @@
                  HorizontalAlignment="Left"
                  Text="{Binding Pin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <!-- Output directory -->
-        <Label Content="Output directory" Grid.Row="1" Grid.Column="0" Margin="10"
-                VerticalAlignment="Center" HorizontalAlignment="Right"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Margin="10"
-                 VerticalAlignment="Center" Width="100" 
-                 HorizontalAlignment="Left"
-                 Text="{Binding OutputDirectory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Grid.Row="1" Grid.ColumnSpan="2" Margin="10"
+                VerticalAlignment="Center" Content="Select directory"
+                Width="100" Padding="12 6" FontSize="14"
+                Click="Button_Click"/>
 
         <!-- Private key file name -->
         <Label Content="Private key file name" Grid.Row="2" Grid.Column="0" Margin="10"

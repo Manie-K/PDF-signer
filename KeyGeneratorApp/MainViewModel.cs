@@ -1,9 +1,7 @@
-﻿using System.ComponentModel;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
-using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
-using System.Windows;
+using System.Windows.Forms;
 
 namespace KeyGeneratorApp
 {
@@ -93,9 +91,25 @@ namespace KeyGeneratorApp
             GenerateKeysCommand = new RelayCommand(GenerateKeys, IsDataValid);
         }
 
+        public void SelectDirectory()
+        {
+            using (FolderBrowserDialog folderDialog = new FolderBrowserDialog())
+            {
+                folderDialog.SelectedPath = @"C:\";
+
+                DialogResult result = folderDialog.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    string selectedFolder = folderDialog.SelectedPath;
+                    OutputDirectory = selectedFolder;
+                }
+            }
+        }
+
         private bool IsDataValid()
         {
-            //pin
+            //Pin
             if (String.IsNullOrEmpty(Pin))
             {
                 _msg = "Pin cannot be empty";
@@ -109,6 +123,13 @@ namespace KeyGeneratorApp
             if (!Pin.All(char.IsDigit))
             {
                 _msg = "Pin must contain only digits";
+                return false;
+            }
+
+            //Output directory
+            if(String.IsNullOrEmpty(OutputDirectory))
+            {
+                _msg = "Output directory must be selected";
                 return false;
             }
 

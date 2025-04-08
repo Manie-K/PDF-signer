@@ -18,5 +18,11 @@ namespace KeyGeneratorApp
             DataContext = new MainViewModel();
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var viewModel = (MainViewModel)this.DataContext;
+            viewModel.SelectDirectory();
+        }
     }
 }
