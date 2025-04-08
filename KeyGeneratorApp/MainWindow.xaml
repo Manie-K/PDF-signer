@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:KeyGeneratorApp" d:DataContext="{d:DesignInstance Type=local:MainViewModel}"
         mc:Ignorable="d"
         Title="Key generation app" Height="450" Width="600">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -55,12 +58,17 @@
         <!-- Generate button -->
         <Button Content="Generate keys" Grid.ColumnSpan="2" Grid.Row="4" 
                 Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"
+                Command="{Binding GenerateKeysCommand}"
+                Padding="12 6" FontSize="14"
                 />
 
-        <!-- Messages -->
+        <!-- Message -->
         <TextBox Grid.Row="5" Grid.ColumnSpan="2" Margin="10"
          VerticalAlignment="Center" Width="400" 
-         HorizontalAlignment="Center"
+         HorizontalAlignment="Center" Text="{Binding Message}"
+         IsReadOnly="True" BorderThickness="0"
+        Visibility="{Binding IsMessageValid, Converter={StaticResource BoolToVis}}" 
+           Foreground="Red"
             />
         
         <!-- Authors -->
