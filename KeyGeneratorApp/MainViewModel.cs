@@ -7,7 +7,7 @@ namespace KeyGeneratorApp
 {
     internal class MainViewModel : ObservableObject
     {
-        private string _pin = "000000";
+        private string _pin = "0000";
         private string _outputPath = "./";
         private string _privateKeyFileName = "privateKey";
         private string _publicKeyFileName = "publicKey";
@@ -20,7 +20,7 @@ namespace KeyGeneratorApp
                 if (_pin != value)
                 {
                     _pin = value;
-                    OnPropertyChanged(); //Check if we need to pass the property name
+                    OnPropertyChanged(); 
                 }
             }
         }
@@ -33,7 +33,7 @@ namespace KeyGeneratorApp
                 if (_outputPath != value)
                 {
                     _outputPath = value;
-                    OnPropertyChanged(); //Check if we need to pass the property name
+                    OnPropertyChanged(); 
                 }
             }
         }
@@ -46,7 +46,7 @@ namespace KeyGeneratorApp
                 if (_privateKeyFileName != value)
                 {
                     _privateKeyFileName = value;
-                    OnPropertyChanged(); //Check if we need to pass the property name
+                    OnPropertyChanged(); 
                 }
             }
         }
@@ -59,7 +59,7 @@ namespace KeyGeneratorApp
                 if (_publicKeyFileName != value)
                 {
                     _publicKeyFileName = value;
-                    OnPropertyChanged(); //Check if we need to pass the property name
+                    OnPropertyChanged(); 
                 }
             }
         }
@@ -69,26 +69,28 @@ namespace KeyGeneratorApp
 
         }
 
-        void GenerateKeys(string pin)
+        void GenerateKeys()
         {
             using (RSA rsa = RSA.Create(4096))
             {
                 byte[] privateKeyBytes = rsa.ExportPkcs8PrivateKey();
                 byte[] publicKeyBytes = rsa.ExportSubjectPublicKeyInfo();
 
-                byte[] encryptedPrivateKeyBytes = EncryptPrivateKey(pin, privateKeyBytes);
+                byte[] encryptedPrivateKeyBytes = EncryptPrivateKey(privateKeyBytes);
 
                 string privateKey = Convert.ToBase64String(privateKeyBytes);
                 string encryptedPrivateKey = Convert.ToBase64String(encryptedPrivateKeyBytes);
                 string publicKey = Convert.ToBase64String(publicKeyBytes);
+
                 Console.WriteLine($"Private Key: {privateKey}");
                 Console.WriteLine($"Encrypted Private Key: {encryptedPrivateKey}");
                 Console.WriteLine($"Public Key: {publicKey}");
             }
         }
 
-        byte[] EncryptPrivateKey(string pin, byte[] privateKeyBytes)
+        byte[] EncryptPrivateKey(byte[] privateKeyBytes)
         {
+            string pin = Pin;
             byte[] encryptedPrivateKey;
 
             byte[] salt = RandomNumberGenerator.GetBytes(16);
