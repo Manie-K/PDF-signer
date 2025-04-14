@@ -5,87 +5,164 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KeyGeneratorApp" d:DataContext="{d:DesignInstance Type=local:MainViewModel}"
         mc:Ignorable="d"
-        Title="Key generation app" Height="450" Width="600">
+        WindowStyle="ThreeDBorderWindow"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        Title="Key generation app" Height="450" Width="600"
+        >
+    
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+        
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Foreground" Value="#fefefe"/>
+            <Setter Property="Background" Value="#7678ed"/>
+            <Setter Property="Padding" Value="12,6"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Width" Value="144"/>
+            <Setter Property="Height" Value="34"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Border x:Name="border"
+                                    Background="{TemplateBinding Background}"
+                                    CornerRadius="8"
+                                    SnapsToDevicePixels="True"
+                                    >
+                                <ContentPresenter HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  RecognizesAccessKey="True"/>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" 
+                                        Property="Background" Value="#5C6BC0"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" 
+                                        Property="Background" Value="#303F9F"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="TextBoxStyle" TargetType="TextBox">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#fefefe"/>
+            <Setter Property="BorderBrush" Value="#033b55"/>
+            <Setter Property="BorderThickness" Value="2"/>
+        </Style>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#fefefe"/>
+        </Style>
     </Window.Resources>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        
-        <!-- PIN -->
-        <Label Content="Pin" Grid.Row="0" Grid.Column="0" Margin="10"
-               VerticalAlignment="Center" HorizontalAlignment="Right"/>
-        <TextBox Grid.Row="0" Grid.Column="1" Margin="10"
-                 VerticalAlignment="Center" Width="100" 
-                 HorizontalAlignment="Left"
-                 Text="{Binding Pin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <!-- Output directory -->
-        <Button Grid.Row="1" Grid.ColumnSpan="2" Margin="10"
-                VerticalAlignment="Center" Content="Select directory"
-                Width="160" Padding="12 6" FontSize="14"
-                Click="Button_Click"/>
+    <Border Background="#1c2541">
+        <Grid>
 
-        <Label Content="Output directory" Grid.Row="2" Grid.Column="0" Margin="10"
-               HorizontalAlignment="Right"/>
-        <TextBox Grid.Row="2" Grid.Column="1" Margin="10"
-                 VerticalAlignment="Center" 
-                 Text="{Binding OutputDirectory}"
-                 IsReadOnly="True" BorderThickness="0"
-                 HorizontalContentAlignment="Left"
-                 HorizontalAlignment="Left"
-                 />
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-        <!-- Private key file name -->
-        <Label Content="Private key file name" Grid.Row="3" Grid.Column="0" Margin="10"
-                VerticalAlignment="Center" HorizontalAlignment="Right"/>
-        <TextBox Grid.Row="3" Grid.Column="1" Margin="10"
-                 VerticalAlignment="Center" Width="100" 
-                 HorizontalAlignment="Left"
-                 Text="{Binding PrivateKeyFileName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <!-- PIN -->
+            <Label Content="Pin" Grid.Row="0" Grid.Column="0" Margin="10"
+                   VerticalAlignment="Center" HorizontalAlignment="Right"
+                   Style="{StaticResource LabelStyle}"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Margin="10"
+                     VerticalAlignment="Center" Width="100" 
+                     HorizontalAlignment="Left"
+                     Style="{StaticResource TextBoxStyle}"
+                     Text="{Binding Pin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <!-- Output directory -->
+            <Button Grid.Row="1" Grid.ColumnSpan="2" Margin="10"
+                    VerticalAlignment="Center" Content="Select directory"
+                    Width="144" Padding="12 6" FontSize="14"
+                    Click="Button_Click"
+                    Style="{StaticResource ButtonStyle}"
+                    />
 
-        <!-- Public key file name -->
-        <Label Content="Public key file name" Grid.Row="4" Grid.Column="0" Margin="10"
-                VerticalAlignment="Center" HorizontalAlignment="Right"/>
-        <TextBox Grid.Row="4" Grid.Column="1" Margin="10"
-                 VerticalAlignment="Center" Width="100" 
-                 HorizontalAlignment="Left"
-                 Text="{Binding PublicKeyFileName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Content="Output directory" Grid.Row="2" Grid.Column="0" Margin="10"
+                   HorizontalAlignment="Right"
+                   Style="{StaticResource LabelStyle}"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Margin="10"
+                     VerticalAlignment="Center" 
+                     Text="{Binding OutputDirectory}"
+                     IsReadOnly="True" BorderThickness="0"
+                     HorizontalContentAlignment="Left"
+                     HorizontalAlignment="Left"
+                     Style="{StaticResource TextBoxStyle}"
+                     />
 
-        <!-- Generate button -->
-        <Button Content="Generate keys" Grid.ColumnSpan="2" Grid.Row="5" 
-                Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"
-                Command="{Binding GenerateKeysCommand}"
-                Padding="12 6" FontSize="14"
-                />
+            <!-- Private key file name -->
+            <Label Content="Private key file name" Grid.Row="3" Grid.Column="0" Margin="10"
+                    VerticalAlignment="Center" HorizontalAlignment="Right"
+                   Style="{StaticResource LabelStyle}"/>
+            <TextBox Grid.Row="3" Grid.Column="1" Margin="10"
+                     VerticalAlignment="Center" Width="100" 
+                     HorizontalAlignment="Left"
+                     Style="{StaticResource TextBoxStyle}"
+                     Text="{Binding PrivateKeyFileName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <!-- Message -->
-        <TextBox x:Name="MsgTextBox" Grid.Row="6" Grid.ColumnSpan="2" Margin="10"
-         VerticalAlignment="Center" Width="400"
-        HorizontalContentAlignment="Center"
-         HorizontalAlignment="Center" Text="{Binding Message}"
-         IsReadOnly="True" BorderThickness="0"/>
+            <!-- Public key file name -->
+            <Label Content="Public key file name" Grid.Row="4" Grid.Column="0" Margin="10"
+                    VerticalAlignment="Center" HorizontalAlignment="Right"
+                   Style="{StaticResource LabelStyle}"/>
+            <TextBox Grid.Row="4" Grid.Column="1" Margin="10"
+                     VerticalAlignment="Center" Width="100" 
+                     HorizontalAlignment="Left"
+                     Style="{StaticResource TextBoxStyle}"
+                     Text="{Binding PublicKeyFileName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <!-- Authors -->
-        <TextBlock Text="Auxillary application used for generating a key pair.
-                   Authors: Maciej Góralczyk, Franciszek Gwarek."
-                    Grid.Row="7" Grid.ColumnSpan="2" Margin="10"
+            <!-- Generate button -->
+            <Button Content="Generate keys" Grid.ColumnSpan="2" Grid.Row="5" 
                     VerticalAlignment="Center" HorizontalAlignment="Center"
-                    Width="300" TextWrapping="Wrap"
-                    TextAlignment="Center" 
-                   FontSize="12"/>
-        
-    </Grid>
+                    Command="{Binding GenerateKeysCommand}"
+                    Style="{StaticResource ButtonStyle}"
+                    Background="#5e548e"
+                    />
+
+            <!-- Message -->
+            <TextBox x:Name="MsgTextBox" Grid.Row="6" Grid.ColumnSpan="2" Margin="10"
+                     VerticalAlignment="Center" Width="400"
+                     HorizontalContentAlignment="Center"
+                     HorizontalAlignment="Center" Text="{Binding Message}"
+                     IsReadOnly="True" BorderThickness="0"
+                     Style="{StaticResource TextBoxStyle}"
+                     FontSize="14" FontWeight="Bold"
+                     />
+
+            <!-- Authors -->
+            <TextBlock Text="Auxillary application used for generating a key pair.
+                       Authors: Maciej Góralczyk, Franciszek Gwarek."
+                       Grid.Row="7" Grid.ColumnSpan="2" Margin="10"
+                       VerticalAlignment="Center" HorizontalAlignment="Center"
+                       Width="300" TextWrapping="Wrap"
+                       TextAlignment="Center" 
+                       FontSize="12"
+                       Foreground="#fefefe"/>
+
+        </Grid>
+    </Border>
 </Window>
