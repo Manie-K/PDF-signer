@@ -9,6 +9,7 @@ namespace KeyGeneratorApp
     internal class MainViewModel : ObservableObject
     {
         private const int PIN_LENGTH = 4;
+        private const string keyFileExtension = ".key";
         public event Action<System.Windows.Media.Brush> OnMessageColorChanged = default;
 
         private string _pin = "0000";
@@ -191,7 +192,7 @@ namespace KeyGeneratorApp
 
         private void SaveToFile(string fileName, byte[] content)
         {
-            fileName += ".bin";
+            fileName += keyFileExtension;
             try
             {
                 File.WriteAllBytes(fileName, content);
