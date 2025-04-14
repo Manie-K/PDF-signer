@@ -161,7 +161,8 @@
                        Width="300" TextWrapping="Wrap"
                        TextAlignment="Center" 
                        FontSize="12"
-                       Foreground="#fefefe"/>
+                       Foreground="#fefefe"
+                       FontStyle="Italic"/>
 
         </Grid>
     </Border>
