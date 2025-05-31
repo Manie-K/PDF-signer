@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PDFSignerApp
+namespace PDFSignerApp2
 {
-    public class MainViewModel
+    class MainViewModel
     {
-        //public PDFSignViewModel PDFSignViewModel { get; set; }
     }
 }

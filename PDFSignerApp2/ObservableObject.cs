@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PDFSignerApp
+namespace PDFSignerApp2
 {
     public class ObservableObject : INotifyPropertyChanged
     {

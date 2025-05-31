@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyGeneratorApp", "KeyGener
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDFSignerApp", "PDFSignerApp\PDFSignerApp.csproj", "{73C362CF-139E-4885-AFBF-AC1B3ABD8AA0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDFSignerApp2", "PDFSignerApp2\PDFSignerApp2.csproj", "{DED0CF10-2BC9-96F1-7DA9-A0CC6EAE48E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,8 +23,15 @@ Global
 		{73C362CF-139E-4885-AFBF-AC1B3ABD8AA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73C362CF-139E-4885-AFBF-AC1B3ABD8AA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73C362CF-139E-4885-AFBF-AC1B3ABD8AA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DED0CF10-2BC9-96F1-7DA9-A0CC6EAE48E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DED0CF10-2BC9-96F1-7DA9-A0CC6EAE48E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DED0CF10-2BC9-96F1-7DA9-A0CC6EAE48E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DED0CF10-2BC9-96F1-7DA9-A0CC6EAE48E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {74B7C85D-43EE-4872-8042-A2446FA27C5C}
 	EndGlobalSection
 EndGlobal

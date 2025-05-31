@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="itext7" Version="9.2.0" />
     <PackageReference Include="Microsoft.Windows.Compatibility" Version="9.0.3" />
   </ItemGroup>
 
