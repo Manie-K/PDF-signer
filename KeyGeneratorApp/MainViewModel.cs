@@ -222,7 +222,12 @@ namespace KeyGeneratorApp
 
                 using (var encryptor = aes.CreateEncryptor())
                 {
-                    encryptedPrivateKey = encryptor.TransformFinalBlock(privateKeyBytes, 0, privateKeyBytes.Length);
+                    byte[] cipherBytes = encryptor.TransformFinalBlock(privateKeyBytes, 0, privateKeyBytes.Length);
+
+                    encryptedPrivateKey = new byte[salt.Length + iv.Length + cipherBytes.Length];
+                    Buffer.BlockCopy(salt, 0, encryptedPrivateKey, 0, salt.Length);
+                    Buffer.BlockCopy(iv, 0, encryptedPrivateKey, salt.Length, iv.Length);
+                    Buffer.BlockCopy(cipherBytes, 0, encryptedPrivateKey, salt.Length + iv.Length, cipherBytes.Length);
                 }
             }
 
