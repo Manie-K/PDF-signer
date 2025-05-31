@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using System.IO;
 using System.Security.Cryptography;
-using System.Windows.Forms;
+//using System.Windows.Forms;
 using System.Windows.Media;
 using iText.Kernel.Pdf;
 using iText.Kernel.XMP;
 using iText.Kernel.XMP.Options;
 
-namespace PDFSignerApp2
+namespace PDFSignerApp
 {
     internal class PDFSignViewModel : ObservableObject
     {
@@ -90,18 +90,18 @@ namespace PDFSignerApp2
 
         public void SelectDirectory()
         {
-            using (FolderBrowserDialog folderDialog = new FolderBrowserDialog())
-            {
-                folderDialog.SelectedPath = @"C:\";
+            //using (FolderBrowserDialog folderDialog = new FolderBrowserDialog())
+            //{
+            //    folderDialog.SelectedPath = @"C:\";
 
-                DialogResult result = folderDialog.ShowDialog();
+            //    DialogResult result = folderDialog.ShowDialog();
 
-                if (result == DialogResult.OK)
-                {
-                    string selectedFolder = folderDialog.SelectedPath;
-                    PrivateKeyDirectory = selectedFolder;
-                }
-            }
+            //    if (result == DialogResult.OK)
+            //    {
+            //        string selectedFolder = folderDialog.SelectedPath;
+            //        PrivateKeyDirectory = selectedFolder;
+            //    }
+            //}
         }
 
         private void TryToSignPDF()
@@ -177,14 +177,14 @@ namespace PDFSignerApp2
 
                 byte[] signature = rsa.SignHash(hash, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
 
-                using (PdfReader reader = new PdfReader(_PDFPath))
-                //TODO: change write directory
-                using (PdfWriter writer = new PdfWriter(_PDFPath + "\\signedPDF"))
-                using (PdfDocument pdfDoc = new PdfDocument(reader, writer))
-                {
-                    PdfDocumentInfo info = pdfDoc.GetDocumentInfo();
-                    info.SetMoreInfo("Signature", Convert.ToBase64String(signature));
-                }
+                //using (PdfReader reader = new PdfReader(_PDFPath))
+                ////TODO: change write directory
+                //using (PdfWriter writer = new PdfWriter(_PDFPath + "\\signedPDF"))
+                //using (PdfDocument pdfDoc = new PdfDocument(reader, writer))
+                //{
+                //    PdfDocumentInfo info = pdfDoc.GetDocumentInfo();
+                //    info.SetMoreInfo("Signature", Convert.ToBase64String(signature));
+                //}
 
                 Message = "PDF signed successfully!";
             }

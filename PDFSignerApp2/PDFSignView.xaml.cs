@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PDFSignerApp2
+namespace PDFSignerApp
 {
     /// <summary>
     /// Interaction logic for PDFSignView.xaml

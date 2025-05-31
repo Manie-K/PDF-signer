@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="PDFSignerApp2.PDFSignView"
+﻿<UserControl x:Class="PDFSignerApp.PDFSignView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:PDFSignerApp2" d:DataContext="{d:DesignInstance Type=local:PDFSignViewModel}"
+             xmlns:local="clr-namespace:PDFSignerApp" d:DataContext="{d:DesignInstance Type=local:PDFSignViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="370" d:DesignWidth="600">
     <Grid>

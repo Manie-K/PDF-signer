@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PDFSignerApp2
+namespace PDFSignerApp
 {
     class MainViewModel
     {
