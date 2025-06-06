@@ -9,7 +9,7 @@ using PDFSignerApp.Helpers;
 
 namespace PDFSignerApp
 {
-    internal class PDFSignViewModel : ObservableObject
+    public class PDFSignViewModel : ObservableObject
     {
         private const int PIN_LENGTH = 4;
         public event Action<System.Windows.Media.Brush> OnMessageColorChanged = default;
@@ -92,7 +92,7 @@ namespace PDFSignerApp
             if (openFileDialog.ShowDialog() == true)
             {
                 string selectedFilePath = openFileDialog.FileName;
-                Debug.Write(Message = $"Selected PDF file: {selectedFilePath}");
+                PDFPath = selectedFilePath;
             }
 
         }
@@ -108,7 +108,7 @@ namespace PDFSignerApp
         private bool IsDataValid()
         {
             //Pin
-            OnMessageColorChanged?.Invoke(new System.Windows.Media.SolidColorBrush(Colors.Red));
+            OnMessageColorChanged?.Invoke(new SolidColorBrush(Colors.Red));
             if (String.IsNullOrEmpty(Pin))
             {
                 Message = "Pin cannot be empty";
@@ -128,18 +128,18 @@ namespace PDFSignerApp
             //Private key directory
             if (String.IsNullOrEmpty(PrivateKeyPath))
             {
-                Message = "Private key directory must be selected";
+                Message = "Private key path must be selected";
                 return false;
             }
 
             //PDF directory
             if (String.IsNullOrEmpty(PDFPath))
             {
-                Message = "PDF directory must be selected";
+                Message = "PDF path must be selected";
                 return false;
             }
 
-            OnMessageColorChanged?.Invoke(new System.Windows.Media.SolidColorBrush(Colors.Green));
+            OnMessageColorChanged?.Invoke(new SolidColorBrush(Colors.Green));
             Message = "";
             return true;
         }

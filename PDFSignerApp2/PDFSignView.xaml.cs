@@ -23,6 +23,22 @@ namespace PDFSignerApp
         public PDFSignView()
         {
             InitializeComponent();
+            this.DataContextChanged += PDFSignView_DataContextChanged;
+            
+        }
+
+        private void PDFSignView_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if(e.NewValue is PDFSignViewModel vm)
+            {
+                if (vm != null)
+                {
+                    vm.OnMessageColorChanged += (Brush brush) =>
+                    {
+                        MsgTextBox.Foreground = brush;
+                    };
+                }
+            }
         }
     }
 }

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:PDFSignerApp" d:DataContext="{d:DesignInstance Type=local:PDFSignViewModel}"
+             xmlns:local="clr-namespace:PDFSignerApp"
              mc:Ignorable="d" 
              d:DesignHeight="370" d:DesignWidth="600">
     <Grid>
@@ -95,7 +95,8 @@
 
         <!-- Message -->
 
-        <TextBox Grid.Row="5"
+        <TextBox x:Name="MsgTextBox"
+                 Grid.Row="5"
                  Grid.ColumnSpan="2" 
                  Margin="10"
                  VerticalAlignment="Center" 

@@ -7,7 +7,7 @@ using PDFSignerApp.Helpers;
 
 namespace PDFSignerApp
 {
-    internal class PDFVerifyViewModel : ObservableObject
+    public class PDFVerifyViewModel : ObservableObject
     {
     }
 }
