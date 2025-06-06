@@ -6,6 +6,8 @@ using System.Windows.Media;
 using iText.Kernel.Pdf;
 using Microsoft.Win32;
 using PDFSignerApp.Helpers;
+using System.Management;
+using System.Linq.Expressions;
 
 namespace PDFSignerApp
 {
@@ -16,7 +18,7 @@ namespace PDFSignerApp
 
         private string _pin = "0000";
         private string _PDFPath = "";
-        private string _privateKeyPath = "";
+        private string _privateKeyPath = "C:\\Users\\franc\\Desktop\\SEMESTR 6\\BSK\\PDF-signer\\Generated keys\\private_key.key";
         private string _msg = "";
 
         public RelayCommand SignPDFCommand { get; }
@@ -59,6 +61,7 @@ namespace PDFSignerApp
                 }
             }
         }
+
         public string Message
         {
             get => _msg;
@@ -72,6 +75,7 @@ namespace PDFSignerApp
                 }
             }
         }
+
         public bool IsMessageValid
         {
             get => _msg.Length > 0;
@@ -81,6 +85,7 @@ namespace PDFSignerApp
         {
             SignPDFCommand = new RelayCommand(() => TryToSignPDF(), () => true);
             SelectPDFCommand = new RelayCommand(() => SelectPDFFile(), () => true);
+            StartUSBWatcher();
         }
 
         public void SelectPDFFile()
@@ -99,7 +104,7 @@ namespace PDFSignerApp
 
         private void TryToSignPDF()
         {
-            PrivateKeyPath = GetPrivateKeyPath();
+            //PrivateKeyPath = GetPrivateKeyPath();
             if (IsDataValid())
             {
                 SignPDF();
@@ -147,7 +152,7 @@ namespace PDFSignerApp
 
         private void SignPDF()
         {
-            Debug.WriteLine("Signing PDF...");
+            Message = "Signing PDF...";
 
             byte[] fileBytes = File.ReadAllBytes(PrivateKeyPath);
             byte[] salt = fileBytes.Take(16).ToArray();
@@ -171,9 +176,12 @@ namespace PDFSignerApp
 
                 byte[] signature = rsa.SignHash(hash, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
 
+                string originalPath = Path.GetDirectoryName(PDFPath);
+                string originalFileNameWithoutExtension = Path.GetFileNameWithoutExtension(PDFPath);
+                string signedPath = Path.Combine(originalPath, originalFileNameWithoutExtension + "_signed.pdf");
+
                 using (PdfReader reader = new PdfReader(PDFPath))
-                //TODO: change write directory
-                using (PdfWriter writer = new PdfWriter(PDFPath + "\\signedPDF"))
+                using (PdfWriter writer = new PdfWriter(signedPath))
                 using (PdfDocument pdfDoc = new PdfDocument(reader, writer))
                 {
                     PdfDocumentInfo info = pdfDoc.GetDocumentInfo();
@@ -192,31 +200,76 @@ namespace PDFSignerApp
         private byte[] DecryptPrivateKey(byte[] encryptedPrivateKey, byte[] salt, byte[] iv)
         {
             string pin = Pin;
-            byte[] decryptedPrivateKey;
-
-            using (Aes aes = Aes.Create())
+            byte[] decryptedPrivateKey = null;
+            
+            try
             {
-                var pbkdf2 = new Rfc2898DeriveBytes(pin, salt, 100_000, HashAlgorithmName.SHA256);
-                var key = pbkdf2.GetBytes(aes.KeySize / 8);
-
-                aes.Key = key;
-                aes.IV = iv;
-
-                using (var decryptor = aes.CreateDecryptor())
+                using (Aes aes = Aes.Create())
                 {
-                    decryptedPrivateKey = decryptor.TransformFinalBlock(encryptedPrivateKey, 0, encryptedPrivateKey.Length);
+                    var pbkdf2 = new Rfc2898DeriveBytes(pin, salt, 100_000, HashAlgorithmName.SHA256);
+                    var key = pbkdf2.GetBytes(aes.KeySize / 8);
+
+                    aes.Key = key;
+                    aes.IV = iv;
+
+                    using (var decryptor = aes.CreateDecryptor())
+                    {
+                        decryptedPrivateKey = decryptor.TransformFinalBlock(encryptedPrivateKey, 0, encryptedPrivateKey.Length);
+                    }
                 }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine($"Error decrypting PDF: {e.Message}");
+                Message = "Error decrypting PDF.";
             }
 
             return decryptedPrivateKey;
         }
 
-        private string GetPrivateKeyPath()
+        private string FindPrivateKeyOnUSB()
         {
-            //TODO: Franek, tutaj
-            string path = string.Empty;
+            foreach (var drive in DriveInfo.GetDrives())
+            {
+                if (drive.DriveType == DriveType.Removable && drive.IsReady)
+                {
+                    try
+                    {
+                        var keyFiles = Directory.GetFiles(drive.RootDirectory.FullName, "*.key", SearchOption.AllDirectories);
+                        if (keyFiles.Length > 0)
+                        {
+                            return keyFiles[0];
+                        }
+                    }
+                    catch (UnauthorizedAccessException)
+                    {
 
-            return path;
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine($"Error while scanning the drive {drive.Name}: {ex.Message}");
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        private void StartUSBWatcher()
+        {
+            var insertQuery = new WqlEventQuery("SELECT * FROM Win32_VolumeChangeEvent WHERE EventType = 2");
+
+            var watcher = new ManagementEventWatcher(insertQuery);
+            watcher.EventArrived += (sender, e) =>
+            {
+                PrivateKeyPath = FindPrivateKeyOnUSB();
+                if (PrivateKeyPath != null)
+                {
+                    Message = "Private key found";
+                }
+            };
+
+            watcher.Start();
         }
 
     }

@@ -9,7 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="BouncyCastle.NetCore" Version="2.2.1" />
     <PackageReference Include="itext7" Version="9.2.0" />
+    <PackageReference Include="itext7.bouncy-castle-adapter" Version="9.2.0" />
+    <PackageReference Include="System.Management" Version="9.0.5" />
   </ItemGroup>
 
 </Project>
