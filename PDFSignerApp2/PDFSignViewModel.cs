@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
 using System.Security.Cryptography;
-//using System.Windows.Forms;
 using System.Windows.Media;
-using iText.Kernel.Pdf;
-using iText.Kernel.XMP;
-using iText.Kernel.XMP.Options;
 
 namespace PDFSignerApp
 {
@@ -90,18 +81,18 @@ namespace PDFSignerApp
 
         public void SelectDirectory()
         {
-            //using (FolderBrowserDialog folderDialog = new FolderBrowserDialog())
-            //{
-            //    folderDialog.SelectedPath = @"C:\";
+            /*using (FolderBrowserDialog folderDialog = new FolderBrowserDialog())
+            {
+                folderDialog.SelectedPath = @"C:\";
 
-            //    DialogResult result = folderDialog.ShowDialog();
+                DialogResult result = folderDialog.ShowDialog();
 
-            //    if (result == DialogResult.OK)
-            //    {
-            //        string selectedFolder = folderDialog.SelectedPath;
-            //        PrivateKeyDirectory = selectedFolder;
-            //    }
-            //}
+                if (result == DialogResult.OK)
+                {
+                    string selectedFolder = folderDialog.SelectedPath;
+                    PrivateKeyDirectory = selectedFolder;
+                }
+            }*/
         }
 
         private void TryToSignPDF()
