@@ -3,6 +3,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Windows.Forms;
 using System.Windows.Media;
+using KeyGeneratorApp.Helpers;
 
 namespace KeyGeneratorApp
 {

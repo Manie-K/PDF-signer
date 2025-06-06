@@ -1,23 +1,26 @@
 ﻿using System.Diagnostics;
 using System.IO;
 using System.Security.Cryptography;
+using System.Windows;
 using System.Windows.Media;
+using iText.Kernel.Pdf;
+using Microsoft.Win32;
+using PDFSignerApp2.Helpers;
 
 namespace PDFSignerApp
 {
     internal class PDFSignViewModel : ObservableObject
     {
         private const int PIN_LENGTH = 4;
-        private const string keyFileExtension = ".key";
         public event Action<System.Windows.Media.Brush> OnMessageColorChanged = default;
 
         private string _pin = "0000";
         private string _PDFPath = "";
-        //TODO: delete static directory
-        private string _privateKeyPath = "C:\\Users\\franc\\Desktop\\SEMESTR 6\\BSK\\PDF-signer\\Generated keys\\private_key.key";
+        private string _privateKeyPath = "";
         private string _msg = "";
 
         public RelayCommand SignPDFCommand { get; }
+        public RelayCommand SelectPDFCommand { get; }
         public string Pin
         {
             get => _pin;
@@ -31,7 +34,7 @@ namespace PDFSignerApp
             }
         }
 
-        public string PrivateKeyDirectory
+        public string PrivateKeyPath
         {
             get => _privateKeyPath;
             set
@@ -44,7 +47,7 @@ namespace PDFSignerApp
             }
         }
 
-        public string PDFDirectory
+        public string PDFPath
         {
             get => _PDFPath;
             set
@@ -76,23 +79,22 @@ namespace PDFSignerApp
 
         public PDFSignViewModel()
         {
-            SignPDFCommand = new RelayCommand(TryToSignPDF, () => true);
+            SignPDFCommand = new RelayCommand(() => TryToSignPDF(), () => true);
+            SelectPDFCommand = new RelayCommand(() => SelectPDFFile(), () => true);
         }
 
-        public void SelectDirectory()
+        public void SelectPDFFile()
         {
-            /*using (FolderBrowserDialog folderDialog = new FolderBrowserDialog())
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "PDF files (*.pdf)|*.pdf";
+            openFileDialog.Title = "Select a PDF file";
+
+            if (openFileDialog.ShowDialog() == true)
             {
-                folderDialog.SelectedPath = @"C:\";
+                string selectedFilePath = openFileDialog.FileName;
+                Debug.Write(Message = $"Selected PDF file: {selectedFilePath}");
+            }
 
-                DialogResult result = folderDialog.ShowDialog();
-
-                if (result == DialogResult.OK)
-                {
-                    string selectedFolder = folderDialog.SelectedPath;
-                    PrivateKeyDirectory = selectedFolder;
-                }
-            }*/
         }
 
         private void TryToSignPDF()
@@ -124,14 +126,14 @@ namespace PDFSignerApp
             }
 
             //Private key directory
-            if (String.IsNullOrEmpty(PrivateKeyDirectory))
+            if (String.IsNullOrEmpty(PrivateKeyPath))
             {
                 Message = "Private key directory must be selected";
                 return false;
             }
 
             //PDF directory
-            if (String.IsNullOrEmpty(PDFDirectory))
+            if (String.IsNullOrEmpty(PDFPath))
             {
                 Message = "PDF directory must be selected";
                 return false;
@@ -146,7 +148,7 @@ namespace PDFSignerApp
         {
             Debug.WriteLine("Signing PDF...");
 
-            byte[] fileBytes = File.ReadAllBytes(PrivateKeyDirectory);
+            byte[] fileBytes = File.ReadAllBytes(PrivateKeyPath);
             byte[] salt = fileBytes.Take(16).ToArray();
             byte[] iv = fileBytes.Skip(16).Take(16).ToArray();
             byte[] encryptedPrivateKey = fileBytes.Skip(32).ToArray();
@@ -155,7 +157,7 @@ namespace PDFSignerApp
 
             try
             {
-                byte[] pdfBytes = File.ReadAllBytes(_PDFPath);
+                byte[] pdfBytes = File.ReadAllBytes(PDFPath);
 
                 byte[] hash;
                 using (SHA256 sha256 = SHA256.Create())
@@ -168,14 +170,14 @@ namespace PDFSignerApp
 
                 byte[] signature = rsa.SignHash(hash, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
 
-                //using (PdfReader reader = new PdfReader(_PDFPath))
-                ////TODO: change write directory
-                //using (PdfWriter writer = new PdfWriter(_PDFPath + "\\signedPDF"))
-                //using (PdfDocument pdfDoc = new PdfDocument(reader, writer))
-                //{
-                //    PdfDocumentInfo info = pdfDoc.GetDocumentInfo();
-                //    info.SetMoreInfo("Signature", Convert.ToBase64String(signature));
-                //}
+                using (PdfReader reader = new PdfReader(PDFPath))
+                //TODO: change write directory
+                using (PdfWriter writer = new PdfWriter(PDFPath + "\\signedPDF"))
+                using (PdfDocument pdfDoc = new PdfDocument(reader, writer))
+                {
+                    PdfDocumentInfo info = pdfDoc.GetDocumentInfo();
+                    info.SetMoreInfo("Signature", Convert.ToBase64String(signature));
+                }
 
                 Message = "PDF signed successfully!";
             }
@@ -183,20 +185,6 @@ namespace PDFSignerApp
             {
                 Debug.WriteLine($"Error signing PDF: {e.Message}");
                 Message = "Error signing PDF.";
-            }
-        }
-
-        private void SaveToFile(string fileName, byte[] content)
-        {
-            fileName += keyFileExtension;
-            try
-            {
-                File.WriteAllBytes(fileName, content);
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Error saving file {fileName}: {ex.Message}");
-                Message = $"Error saving file {fileName}: {ex.Message}";
             }
         }
 

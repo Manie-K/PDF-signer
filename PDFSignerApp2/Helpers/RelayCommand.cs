@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace KeyGeneratorApp
+namespace PDFSignerApp2.Helpers
 {
     public class RelayCommand : ICommand
     {

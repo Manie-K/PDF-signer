@@ -45,6 +45,7 @@
                 Width="144" 
                 Padding="12 6" 
                 FontSize="14"
+                Command="{Binding SelectPDFCommand}"
         />
 
         <!-- Info selected PDF -->
@@ -62,7 +63,7 @@
                  IsReadOnly="True" BorderThickness="0"
                  HorizontalContentAlignment="Left"
                  HorizontalAlignment="Left"
-                 Text="{Binding PDFDirectory}"/>
+                 Text="{Binding PDFPath}"/>
 
         <!-- Info key -->
         <Label Content="Private key info" 
@@ -79,10 +80,10 @@
                  IsReadOnly="True" BorderThickness="0"
                  HorizontalContentAlignment="Left"
                  HorizontalAlignment="Left"
-                 Text="{Binding PrivateKeyDirectory}"/>
+                 Text="{Binding PrivateKeyPath}"/>
 
         <!-- Sign button -->
-        <Button Content="Sign pdf" 
+        <Button Content="Sign PDF" 
                 Grid.ColumnSpan="2" 
                 Grid.Row="4" 
                 FontSize="14"

@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace PDFSignerApp
 {
-    class MainViewModel
+    public class MainViewModel
     {
+        public PDFSignView PDFSignView { get; set; } = new();
+        //public PDFVerifyView PDFVerifyView { get; set; } = new();
+
     }
 }
