@@ -99,6 +99,7 @@ namespace PDFSignerApp
 
         private void TryToSignPDF()
         {
+            PrivateKeyPath = GetPrivateKeyPath();
             if (IsDataValid())
             {
                 SignPDF();
@@ -210,7 +211,13 @@ namespace PDFSignerApp
             return decryptedPrivateKey;
         }
 
+        private string GetPrivateKeyPath()
+        {
+            //TODO: Franek, tutaj
+            string path = string.Empty;
 
+            return path;
+        }
 
     }
 }
