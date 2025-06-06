@@ -27,12 +27,15 @@
                 </Grid.ColumnDefinitions>
 
                 <Button Content="Sign PDF"
-                        Grid.Column="0"/>
+                        Grid.Column="0"
+                        Command="{Binding PDFSignViewCommand}"
+                        />
 
                 <Button Content="Verify"
-                        Grid.Column="1"/>
+                        Grid.Column="1"
+                        Command="{Binding PDFVerifyViewCommand}"/>
             </Grid>
-            <local:PDFSignView Grid.Row="1"/>
+            <ContentControl Content="{Binding CurrentViewModel}" Grid.Row="1"/>
 
             <TextBlock Text="Main application used to sign PDF files and verify signatures.  Authors: Maciej Góralczyk, Franciszek Gwarek."
                        Grid.Row="7" 

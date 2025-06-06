@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PDFSignerApp.Helpers;
 
-namespace PDFSignerApp2
+namespace PDFSignerApp
 {
-    public class PDFVerifyViewModel
+    internal class PDFVerifyViewModel : ObservableObject
     {
     }
 }

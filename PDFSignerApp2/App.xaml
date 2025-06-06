@@ -4,6 +4,11 @@
              xmlns:local="clr-namespace:PDFSignerApp"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <DataTemplate DataType="{x:Type local:PDFSignViewModel}">
+            <local:PDFSignView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:PDFVerifyViewModel}">
+            <local:PDFVerifyView />
+        </DataTemplate>
     </Application.Resources>
 </Application>

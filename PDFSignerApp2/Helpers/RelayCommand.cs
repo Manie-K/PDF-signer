@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace PDFSignerApp2.Helpers
+namespace PDFSignerApp.Helpers
 {
     public class RelayCommand : ICommand
     {

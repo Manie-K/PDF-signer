@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Media;
 using iText.Kernel.Pdf;
 using Microsoft.Win32;
-using PDFSignerApp2.Helpers;
+using PDFSignerApp.Helpers;
 
 namespace PDFSignerApp
 {

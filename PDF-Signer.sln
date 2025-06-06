@@ -5,7 +5,7 @@ VisualStudioVersion = 17.12.35521.163
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyGeneratorApp", "KeyGeneratorApp\KeyGeneratorApp.csproj", "{74FAC355-34FF-48FB-9354-DA491CFF2005}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDFSignerApp2", "PDFSignerApp2\PDFSignerApp2.csproj", "{DED0CF10-2BC9-96F1-7DA9-A0CC6EAE48E2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDFSignerApp", "PDFSignerApp2\PDFSignerApp.csproj", "{DED0CF10-2BC9-96F1-7DA9-A0CC6EAE48E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
