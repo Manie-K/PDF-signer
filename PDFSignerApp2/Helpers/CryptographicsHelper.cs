@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Security.Cryptography;
 using iText.Kernel.Pdf;
-using System.Windows.Media;
 using System.IO;
-using System.Diagnostics;
-using System.Net.NetworkInformation;
+using iText.Signatures;
 
 namespace PDFSignerApp.Helpers
 {
@@ -22,6 +15,16 @@ namespace PDFSignerApp.Helpers
         public bool SignPDF(string pdfPath, string privateKeyPath, string pin, out string message)
         {
             message = "Signing PDF...";
+
+            // 1. Decrypt private key
+            // 2. Read PDF file
+            // 3. Compute SHA256 hash of the PDF
+            // 4. Sign the hash with the private key
+            // 5. Write the signature to the PDF
+            // 6. Save the signed PDF as new file
+
+
+            // 1. Decrypt private key
 
             byte[] fileBytes = File.ReadAllBytes(privateKeyPath);
             byte[] salt = fileBytes.Take(16).ToArray();
@@ -39,8 +42,11 @@ namespace PDFSignerApp.Helpers
                 return false;
             }
 
+
             try
             {
+                // 2. Read PDF file
+
                 string? originalPath = Path.GetDirectoryName(pdfPath);
                 if(originalPath == null)
                 {
@@ -48,15 +54,10 @@ namespace PDFSignerApp.Helpers
                     return false;
                 }
 
-                string originalFileNameWithoutExtension = Path.GetFileNameWithoutExtension(pdfPath);
-                string tempPath = Path.Combine(originalPath, originalFileNameWithoutExtension + "_temp.pdf");
+                byte[] pdfBytes = File.ReadAllBytes(originalPath);
 
-                using (PdfReader reader = new PdfReader(pdfPath))
-                using (PdfWriter writer = new PdfWriter(tempPath))
-                using (PdfDocument pdfDoc = new PdfDocument(reader, writer))
-                {}
 
-                byte[] pdfBytes = File.ReadAllBytes(tempPath);
+                // 3. Compute SHA256 hash of the PDF
 
                 byte[] hash;
                 using (SHA256 sha256 = SHA256.Create())
@@ -64,20 +65,26 @@ namespace PDFSignerApp.Helpers
                     hash = sha256.ComputeHash(pdfBytes);
                 }
 
+
+                // 4. Sign the hash with the private key
+
                 RSA rsa = RSA.Create();
                 rsa.ImportPkcs8PrivateKey(decryptedPrivateKeyBytes, out _);
 
                 byte[] signature = rsa.SignHash(hash, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
 
-                originalFileNameWithoutExtension = Path.GetFileNameWithoutExtension(pdfPath);
+
+                // 5. Write the signature to the PDF    &&    6. Save the signed PDF as new file
+
+                string originalFileNameWithoutExtension = Path.GetFileNameWithoutExtension(pdfPath);
                 string signedPath = Path.Combine(originalPath, originalFileNameWithoutExtension + "_signed.pdf");
 
-                using (PdfReader reader = new PdfReader(tempPath))
+                string signatureAsString = Convert.ToBase64String(signature);
+
+                using (PdfReader reader = new PdfReader(pdfPath))
                 using (PdfWriter writer = new PdfWriter(signedPath))
-                using (PdfDocument pdfDoc = new PdfDocument(reader, writer))
                 {
-                    PdfDocumentInfo info = pdfDoc.GetDocumentInfo();
-                    info.SetMoreInfo("Signature", Convert.ToBase64String(signature));
+                    // Tu trzeba podziałać
                 }
 
                 message = "PDF signed successfully!";
@@ -92,53 +99,49 @@ namespace PDFSignerApp.Helpers
 
         public bool VerifyPDFSignature(string pdfPath, string publicKeyPath, out string message)
         {
+            // 1. Read the signed PDF file
+            // 2. Extract the signature from the PDF
+            // 3. Extract the unsigned PDF content
+            // 4. Compute SHA256 hash of the unsigned PDF content
+            // 5. Verify the signature using the public key and the hash
+            // 6. Return the verification result
+
             try
             {
                 string base64Signature;
 
-                string? originalPath = Path.GetDirectoryName(pdfPath);
-                if (originalPath == null)
-                {
-                    message = "Error: Original path is null.";
-                    return false;
-                }
+                // 1. Read the signed PDF file
 
-                string originalFileNameWithoutExtension = Path.GetFileNameWithoutExtension(pdfPath);
-                string tempPath = Path.Combine(originalPath, originalFileNameWithoutExtension + "_temp.pdf");
 
-                using (PdfReader reader = new PdfReader(pdfPath))
-                using (PdfWriter writer = new PdfWriter(tempPath))
-                using (PdfDocument pdfDoc = new PdfDocument(reader, writer))
-                {
-                    base64Signature = pdfDoc.GetDocumentInfo().GetMoreInfo("Signature");
 
-                    PdfDocumentInfo info = pdfDoc.GetDocumentInfo();
-                    PdfDictionary catalog = pdfDoc.GetCatalog().GetPdfObject();
-                    catalog.Remove(new PdfName("Signature"));
-                    pdfDoc.Close();
-                }
 
-                byte[] fileBytes = File.ReadAllBytes(tempPath);
+                // 2. Extract the signature from the PDF
 
-                byte[] hash;
-                using (SHA256 sha256 = SHA256.Create())
-                {
-                    hash = sha256.ComputeHash(fileBytes);
-                }
 
-                if (string.IsNullOrEmpty(base64Signature))
-                {
-                    message = "No signature in PDF file";
-                    return false;
-                }
+
+
+                // 3. Extract the unsigned PDF content
+
+
+
+
+                // 4. Compute SHA256 hash of the unsigned PDF content
+
+
+
+
+
+                // 5. Verify the signature using the public key and the hash
 
                 byte[] signature = Convert.FromBase64String(base64Signature);
                 byte[] publicKeyBytes = File.ReadAllBytes(publicKeyPath);
-
                 RSA rsa = RSA.Create();
                 rsa.ImportSubjectPublicKeyInfo(publicKeyBytes, out _);
 
                 bool isValid = rsa.VerifyHash(hash, signature, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+
+
+                // 6. Return the verification result
 
                 if (isValid)
                 {
