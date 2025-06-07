@@ -10,7 +10,7 @@ using System.IO;
 using System.Diagnostics;
 using System.Net.NetworkInformation;
 
-namespace PDFSignerApp
+namespace PDFSignerApp.Helpers
 {
     public class CryptographicsHelper
     {
@@ -29,7 +29,7 @@ namespace PDFSignerApp
             byte[] encryptedPrivateKey = fileBytes.Skip(32).ToArray();
 
             byte[] decryptedPrivateKeyBytes = DecryptPrivateKey(encryptedPrivateKey, salt, iv, pin, out string msg);
-            if(msg != String.Empty)
+            if (msg != string.Empty)
             {
                 message = msg;
             }
@@ -55,7 +55,7 @@ namespace PDFSignerApp
                 byte[] signature = rsa.SignHash(hash, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
 
                 string? originalPath = Path.GetDirectoryName(pdfPath);
-                if(originalPath == null)
+                if (originalPath == null)
                 {
                     message = "Error: Original path is null.";
                     return false;
@@ -90,7 +90,7 @@ namespace PDFSignerApp
                 string base64Signature = "woda";
 
                 string? originalPath = Path.GetDirectoryName(pdfPath);
-                if(originalPath == null)
+                if (originalPath == null)
                 {
                     message = "Error: Original path is null.";
                     return false;
@@ -149,8 +149,7 @@ namespace PDFSignerApp
             }
         }
 
-
-        private byte[] DecryptPrivateKey(byte[] encryptedPrivateKey, byte[] salt, byte[] iv, string pin, out string message)
+        internal byte[] DecryptPrivateKey(byte[] encryptedPrivateKey, byte[] salt, byte[] iv, string pin, out string message)
         {
             byte[] decryptedPrivateKey = [];
             message = string.Empty;
@@ -158,13 +157,13 @@ namespace PDFSignerApp
             try
             {
                 using Aes aes = Aes.Create();
-                
+
                 var pbkdf2 = new Rfc2898DeriveBytes(pin, salt, 100_000, HashAlgorithmName.SHA256);
                 var key = pbkdf2.GetBytes(aes.KeySize / 8);
                 aes.Key = key;
                 aes.IV = iv;
 
-                using(var decryptor = aes.CreateDecryptor())
+                using (var decryptor = aes.CreateDecryptor())
                 {
                     decryptedPrivateKey = decryptor.TransformFinalBlock(encryptedPrivateKey, 0, encryptedPrivateKey.Length);
                 }
