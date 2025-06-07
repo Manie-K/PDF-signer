@@ -134,6 +134,7 @@ namespace PDFSignerApp
         {
             try
             {
+                OnMessageColorChanged?.Invoke(new SolidColorBrush(Colors.Red));
                 byte[] pdfBytes = File.ReadAllBytes(_PDFPath);
 
                 string base64Signature;
@@ -168,6 +169,7 @@ namespace PDFSignerApp
 
                 if (isValid)
                 {
+                    OnMessageColorChanged?.Invoke(new SolidColorBrush(Colors.Green));
                     Message = "Signature is valid";
                 }
                 else
