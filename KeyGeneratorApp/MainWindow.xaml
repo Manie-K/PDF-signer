@@ -10,7 +10,6 @@
         Background="Transparent"
         Title="Key generation app" Height="450" Width="600"
         >
-    
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
         

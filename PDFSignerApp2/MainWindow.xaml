@@ -9,14 +9,64 @@
         ResizeMode="NoResize"
         Background="Transparent"
         Title="PDF signer app" Height="450" Width="600">
-    <Border Background="#eeeeee">
+    <Window.Resources>
+        <Style x:Key="MajorButtonStyle" TargetType="Button">
+            <Setter Property="Foreground" Value="#1b263b"/>
+            <Setter Property="Background" Value="#a8dadc"/>
+            <Setter Property="Padding" Value="12,6"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Width" Value="270"/>
+            <Setter Property="Height" Value="60"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Border x:Name="border"
+                                    Background="{TemplateBinding Background}"
+                                    CornerRadius="8"
+                                    SnapsToDevicePixels="True"
+                            >
+                                <ContentPresenter HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  RecognizesAccessKey="True"
+                                />
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" 
+                                        Property="Background" Value="#f1faee"
+                                />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" 
+                                        Property="Background" Value="#219ebc"
+                                />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Border Background="#1c2541">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="80" />
+                <RowDefinition Height="10" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="10" />
                 <RowDefinition Height="30" />
             </Grid.RowDefinitions>
 
@@ -29,26 +79,42 @@
                 <Button Content="Sign PDF"
                         Grid.Column="0"
                         Command="{Binding PDFSignViewCommand}"
-                        />
+                        Style="{StaticResource MajorButtonStyle}"
+                />
 
                 <Button Content="Verify"
                         Grid.Column="1"
-                        Command="{Binding PDFVerifyViewCommand}"/>
+                        Command="{Binding PDFVerifyViewCommand}"
+                        Style="{StaticResource MajorButtonStyle}"
+                />
             </Grid>
-            <ContentControl Content="{Binding CurrentViewModel}" Grid.Row="1"/>
+
+            <Border Grid.Row="1"
+                    Background="Black" 
+                    HorizontalAlignment="Stretch"
+            />
+            
+            <ContentControl Content="{Binding CurrentViewModel}" 
+                            Grid.Row="2"
+            />
+
+            <Border Grid.Row="3"
+                    Background="Black" 
+                    HorizontalAlignment="Stretch"
+            />
 
             <TextBlock Text="Main application used to sign PDF files and verify signatures.  Authors: Maciej Góralczyk, Franciszek Gwarek."
-                       Grid.Row="7" 
+                       Grid.Row="4" 
                        Grid.ColumnSpan="2"
                        VerticalAlignment="Stretch"
                        HorizontalAlignment="Stretch"
                        TextWrapping="Wrap"
                        TextAlignment="Center" 
                        FontSize="12"
-                       Foreground="#000000"
+                       Foreground="#fefefe"
                        FontStyle="Italic"
                        Margin="0 5 0 0"
-                       />
+            />
         </Grid>
     </Border>
 </Window>

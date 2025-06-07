@@ -179,7 +179,7 @@ namespace PDFSignerApp
             }
             catch (Exception ex)
             {
-                Message = "Error while verifying signature";
+                Message = $"Error while verifying signature: {ex.Message}";
             }
         }
     }
