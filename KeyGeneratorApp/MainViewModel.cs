@@ -11,7 +11,7 @@ namespace KeyGeneratorApp
     {
         private const int PIN_LENGTH = 4;
         private const string keyFileExtension = ".key";
-        public event Action<System.Windows.Media.Brush> OnMessageColorChanged = default;
+        public event Action<System.Windows.Media.Brush>? OnMessageColorChanged;
 
         private string _pin = "0000";
         private string _outputPath = "";

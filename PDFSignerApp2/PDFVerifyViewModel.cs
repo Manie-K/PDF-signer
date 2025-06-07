@@ -1,22 +1,14 @@
-﻿using iText.Kernel.Pdf;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using PDFSignerApp.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Management;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media;
 
 namespace PDFSignerApp
 {
     public class PDFVerifyViewModel : ObservableObject
     {
-        public event Action<System.Windows.Media.Brush> OnMessageColorChanged = default;
+        public event Action<System.Windows.Media.Brush>? OnMessageColorChanged;
+
+        private readonly CryptographicsHelper _crypto;
 
         private string _PDFPath = "";
         private string _publicKeyPath = "";
@@ -70,6 +62,7 @@ namespace PDFSignerApp
 
         public PDFVerifyViewModel()
         {
+            _crypto = new CryptographicsHelper();
             VerifyPDFCommand = new RelayCommand(() => TryToVerifyPDFSignature(), () => true);
             SelectPDFCommand = new RelayCommand(() => SelectPDFFile(), () => true);
             SelectPKCommand = new RelayCommand(() => SelectPKFile(), () => true);
@@ -100,12 +93,21 @@ namespace PDFSignerApp
             }
         }
 
-
         private void TryToVerifyPDFSignature()
         {
             if (IsDataValid())
             {
-                VerifyPDFSignature();
+                bool success = _crypto.VerifyPDFSignature(PDFPath, PublicKeyPath, out string message);
+                Message = message;
+                
+                if(success)
+                {
+                    OnMessageColorChanged?.Invoke(new SolidColorBrush(Colors.Green));
+                }
+                else
+                {
+                    OnMessageColorChanged?.Invoke(new SolidColorBrush(Colors.Red));
+                }
             }
         }
 
@@ -129,66 +131,6 @@ namespace PDFSignerApp
             OnMessageColorChanged?.Invoke(new SolidColorBrush(Colors.Green));
             Message = "";
             return true;
-        }
-
-        private void VerifyPDFSignature()
-        {
-            try
-            {
-                OnMessageColorChanged?.Invoke(new SolidColorBrush(Colors.Red));
-                byte[] pdfBytes = File.ReadAllBytes(_PDFPath);
-                string base64Signature = "woda";
-
-                string originalPath = Path.GetDirectoryName(PDFPath);
-                string originalFileNameWithoutExtension = Path.GetFileNameWithoutExtension(PDFPath);
-                string tempPath = Path.Combine(originalPath, originalFileNameWithoutExtension + "_temp.pdf");
-
-                using (PdfReader reader = new PdfReader(PDFPath))
-                using (PdfWriter writer = new PdfWriter(tempPath))
-                using (PdfDocument pdfDoc = new PdfDocument(reader, writer))
-                {
-                    //base64Signature = pdfDoc.GetDocumentInfo().GetMoreInfo("Signature");
-
-                    PdfDocumentInfo info = pdfDoc.GetDocumentInfo();
-                    //info.SetMoreInfo("Signature", null);
-                }
-
-                byte[] fileBytes = File.ReadAllBytes(tempPath);
-
-                byte[] hash;
-                using (SHA256 sha256 = SHA256.Create())
-                {
-                    hash = sha256.ComputeHash(fileBytes);
-                }
-
-                if (string.IsNullOrEmpty(base64Signature))
-                {
-                    Message = "No signature in PDF file";
-                    return;
-                }
-
-                byte[] signature = Convert.FromBase64String(base64Signature);
-                byte[] publicKeyBytes = File.ReadAllBytes(_publicKeyPath);
-
-                RSA rsa = RSA.Create();
-                rsa.ImportSubjectPublicKeyInfo(publicKeyBytes, out _);
-
-                bool isValid = rsa.VerifyHash(hash, signature, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
-
-                if (isValid)
-                {
-                    OnMessageColorChanged?.Invoke(new SolidColorBrush(Colors.Green));
-                    Message = "Signature is valid";
-                }
-                else
-                {
-                    Message = "Signature is not valid";
-                }
-            }
-            catch (Exception ex)
-            {
-                Message = $"Error while verifying signature: {ex.Message}";
-            }
         }
     }
 }

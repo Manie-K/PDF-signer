@@ -14,7 +14,9 @@ namespace PDFSignerApp
     public class PDFSignViewModel : ObservableObject
     {
         private const int PIN_LENGTH = 4;
-        public event Action<System.Windows.Media.Brush> OnMessageColorChanged = default;
+        public event Action<System.Windows.Media.Brush>? OnMessageColorChanged;
+
+        private readonly CryptographicsHelper _crypto;
 
         private string _pin = "0000";
         private string _PDFPath = "";
@@ -23,6 +25,7 @@ namespace PDFSignerApp
 
         public RelayCommand SignPDFCommand { get; }
         public RelayCommand SelectPDFCommand { get; }
+       
         public string Pin
         {
             get => _pin;
@@ -79,6 +82,7 @@ namespace PDFSignerApp
 
         public PDFSignViewModel()
         {
+            _crypto = new CryptographicsHelper();
             SignPDFCommand = new RelayCommand(() => TryToSignPDF(), () => true);
             SelectPDFCommand = new RelayCommand(() => SelectPDFFile(), () => true);
             EnableUSBWatcher();
@@ -102,7 +106,17 @@ namespace PDFSignerApp
         {
             if (IsDataValid())
             {
-                SignPDF();
+                bool success = _crypto.SignPDF(PDFPath, PrivateKeyPath, Pin, out string message);
+
+                Message = message;
+                if (success)
+                {
+                    OnMessageColorChanged?.Invoke(new SolidColorBrush(Colors.Green));
+                }
+                else
+                {
+                    OnMessageColorChanged?.Invoke(new SolidColorBrush(Colors.Red));
+                }
             }
         }
 
@@ -143,82 +157,6 @@ namespace PDFSignerApp
             OnMessageColorChanged?.Invoke(new SolidColorBrush(Colors.Green));
             Message = "";
             return true;
-        }
-
-        private void SignPDF()
-        {
-            Message = "Signing PDF...";
-
-            byte[] fileBytes = File.ReadAllBytes(PrivateKeyPath);
-            byte[] salt = fileBytes.Take(16).ToArray();
-            byte[] iv = fileBytes.Skip(16).Take(16).ToArray();
-            byte[] encryptedPrivateKey = fileBytes.Skip(32).ToArray();
-
-            byte[] decryptedPrivateKeyBytes = DecryptPrivateKey(encryptedPrivateKey, salt, iv);
-
-            try
-            {
-                byte[] pdfBytes = File.ReadAllBytes(PDFPath);
-
-                byte[] hash;
-                using (SHA256 sha256 = SHA256.Create())
-                {
-                    hash = sha256.ComputeHash(pdfBytes);
-                }
-
-                RSA rsa = RSA.Create();
-                rsa.ImportPkcs8PrivateKey(decryptedPrivateKeyBytes, out _);
-
-                byte[] signature = rsa.SignHash(hash, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
-
-                string originalPath = Path.GetDirectoryName(PDFPath);
-                string originalFileNameWithoutExtension = Path.GetFileNameWithoutExtension(PDFPath);
-                string signedPath = Path.Combine(originalPath, originalFileNameWithoutExtension + "_signed.pdf");
-
-                using (PdfReader reader = new PdfReader(PDFPath))
-                using (PdfWriter writer = new PdfWriter(signedPath))
-                using (PdfDocument pdfDoc = new PdfDocument(reader, writer))
-                {
-                    PdfDocumentInfo info = pdfDoc.GetDocumentInfo();
-                    //info.SetMoreInfo("Signature", Convert.ToBase64String(signature));
-                }
-
-                Message = "PDF signed successfully!";
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine($"Error signing PDF: {e.Message}");
-                Message = "Error signing PDF.";
-            }
-        }
-        private byte[] DecryptPrivateKey(byte[] encryptedPrivateKey, byte[] salt, byte[] iv)
-        {
-            string pin = Pin;
-            byte[] decryptedPrivateKey = null;
-            
-            try
-            {
-                using (Aes aes = Aes.Create())
-                {
-                    var pbkdf2 = new Rfc2898DeriveBytes(pin, salt, 100_000, HashAlgorithmName.SHA256);
-                    var key = pbkdf2.GetBytes(aes.KeySize / 8);
-
-                    aes.Key = key;
-                    aes.IV = iv;
-
-                    using (var decryptor = aes.CreateDecryptor())
-                    {
-                        decryptedPrivateKey = decryptor.TransformFinalBlock(encryptedPrivateKey, 0, encryptedPrivateKey.Length);
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine($"Error decrypting PDF: {e.Message}");
-                Message = "Error decrypting PDF.";
-            }
-
-            return decryptedPrivateKey;
         }
 
         private void EnableUSBWatcher()

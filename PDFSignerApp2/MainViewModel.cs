@@ -10,8 +10,8 @@ namespace PDFSignerApp
 {
     public class MainViewModel : ObservableObject
     {
-        private object _currentViewModel;
-        public object CurrentViewModel
+        private object? _currentViewModel;
+        public object? CurrentViewModel
         {
             get => _currentViewModel;
             set
