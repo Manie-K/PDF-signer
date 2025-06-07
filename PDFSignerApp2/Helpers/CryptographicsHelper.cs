@@ -10,7 +10,7 @@ using System.IO;
 using System.Diagnostics;
 using System.Net.NetworkInformation;
 
-namespace PDFSignerApp
+namespace PDFSignerApp.Helpers
 {
     public class CryptographicsHelper
     {
@@ -29,7 +29,7 @@ namespace PDFSignerApp
             byte[] encryptedPrivateKey = fileBytes.Skip(32).ToArray();
 
             byte[] decryptedPrivateKeyBytes = DecryptPrivateKey(encryptedPrivateKey, salt, iv, pin, out string msg);
-            if(msg != String.Empty)
+            if(msg != string.Empty)
             {
                 message = msg;
             }
@@ -41,7 +41,22 @@ namespace PDFSignerApp
 
             try
             {
-                byte[] pdfBytes = File.ReadAllBytes(pdfPath);
+                string? originalPath = Path.GetDirectoryName(pdfPath);
+                if(originalPath == null)
+                {
+                    message = "Error: Original path is null.";
+                    return false;
+                }
+
+                string originalFileNameWithoutExtension = Path.GetFileNameWithoutExtension(pdfPath);
+                string tempPath = Path.Combine(originalPath, originalFileNameWithoutExtension + "_temp.pdf");
+
+                using (PdfReader reader = new PdfReader(pdfPath))
+                using (PdfWriter writer = new PdfWriter(tempPath))
+                using (PdfDocument pdfDoc = new PdfDocument(reader, writer))
+                {}
+
+                byte[] pdfBytes = File.ReadAllBytes(tempPath);
 
                 byte[] hash;
                 using (SHA256 sha256 = SHA256.Create())
@@ -54,17 +69,11 @@ namespace PDFSignerApp
 
                 byte[] signature = rsa.SignHash(hash, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
 
-                string? originalPath = Path.GetDirectoryName(pdfPath);
-                if(originalPath == null)
-                {
-                    message = "Error: Original path is null.";
-                    return false;
-                }
 
-                string originalFileNameWithoutExtension = Path.GetFileNameWithoutExtension(pdfPath);
+                originalFileNameWithoutExtension = Path.GetFileNameWithoutExtension(pdfPath);
                 string signedPath = Path.Combine(originalPath, originalFileNameWithoutExtension + "_signed.pdf");
 
-                using (PdfReader reader = new PdfReader(pdfPath))
+                using (PdfReader reader = new PdfReader(tempPath))
                 using (PdfWriter writer = new PdfWriter(signedPath))
                 using (PdfDocument pdfDoc = new PdfDocument(reader, writer))
                 {
