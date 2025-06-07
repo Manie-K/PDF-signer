@@ -69,13 +69,6 @@ namespace PDFSignerApp.Helpers
 
                 byte[] signature = rsa.SignHash(hash, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
 
-                string? originalPath = Path.GetDirectoryName(pdfPath);
-                if (originalPath == null)
-                {
-                    message = "Error: Original path is null.";
-                    return false;
-                }
-
                 originalFileNameWithoutExtension = Path.GetFileNameWithoutExtension(pdfPath);
                 string signedPath = Path.Combine(originalPath, originalFileNameWithoutExtension + "_signed.pdf");
 
@@ -101,8 +94,7 @@ namespace PDFSignerApp.Helpers
         {
             try
             {
-                byte[] pdfBytes = File.ReadAllBytes(pdfPath);
-                string base64Signature = "woda";
+                string base64Signature;
 
                 string? originalPath = Path.GetDirectoryName(pdfPath);
                 if (originalPath == null)
@@ -121,7 +113,9 @@ namespace PDFSignerApp.Helpers
                     base64Signature = pdfDoc.GetDocumentInfo().GetMoreInfo("Signature");
 
                     PdfDocumentInfo info = pdfDoc.GetDocumentInfo();
-                    info.SetMoreInfo("Signature", null);
+                    PdfDictionary catalog = pdfDoc.GetCatalog().GetPdfObject();
+                    catalog.Remove(new PdfName("Signature"));
+                    pdfDoc.Close();
                 }
 
                 byte[] fileBytes = File.ReadAllBytes(tempPath);
