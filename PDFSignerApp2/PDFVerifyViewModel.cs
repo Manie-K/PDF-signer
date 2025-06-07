@@ -108,6 +108,7 @@ namespace PDFSignerApp
                 VerifyPDFSignature();
             }
         }
+
         private bool IsDataValid()
         {
             OnMessageColorChanged?.Invoke(new SolidColorBrush(Colors.Red));
@@ -136,13 +137,28 @@ namespace PDFSignerApp
             {
                 OnMessageColorChanged?.Invoke(new SolidColorBrush(Colors.Red));
                 byte[] pdfBytes = File.ReadAllBytes(_PDFPath);
+                string base64Signature = "woda";
 
-                string base64Signature;
-                using (PdfReader reader = new PdfReader(_PDFPath))
-                using (PdfDocument pdfDoc = new PdfDocument(reader))
+                string originalPath = Path.GetDirectoryName(PDFPath);
+                string originalFileNameWithoutExtension = Path.GetFileNameWithoutExtension(PDFPath);
+                string tempPath = Path.Combine(originalPath, originalFileNameWithoutExtension + "_temp.pdf");
+
+                using (PdfReader reader = new PdfReader(PDFPath))
+                using (PdfWriter writer = new PdfWriter(tempPath))
+                using (PdfDocument pdfDoc = new PdfDocument(reader, writer))
                 {
+                    //base64Signature = pdfDoc.GetDocumentInfo().GetMoreInfo("Signature");
+
                     PdfDocumentInfo info = pdfDoc.GetDocumentInfo();
-                    base64Signature = info.GetMoreInfo("Signature");
+                    //info.SetMoreInfo("Signature", null);
+                }
+
+                byte[] fileBytes = File.ReadAllBytes(tempPath);
+
+                byte[] hash;
+                using (SHA256 sha256 = SHA256.Create())
+                {
+                    hash = sha256.ComputeHash(fileBytes);
                 }
 
                 if (string.IsNullOrEmpty(base64Signature))
@@ -152,14 +168,6 @@ namespace PDFSignerApp
                 }
 
                 byte[] signature = Convert.FromBase64String(base64Signature);
-
-                // Oblicz hash PDF-a (UWAGA: tu nie pomijamy metadanych, co może być problemem)
-                byte[] hash;
-                using (SHA256 sha256 = SHA256.Create())
-                {
-                    hash = sha256.ComputeHash(pdfBytes);
-                }
-
                 byte[] publicKeyBytes = File.ReadAllBytes(_publicKeyPath);
 
                 RSA rsa = RSA.Create();
