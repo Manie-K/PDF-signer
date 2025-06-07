@@ -69,6 +69,12 @@ namespace PDFSignerApp.Helpers
 
                 byte[] signature = rsa.SignHash(hash, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
 
+                string? originalPath = Path.GetDirectoryName(pdfPath);
+                if (originalPath == null)
+                {
+                    message = "Error: Original path is null.";
+                    return false;
+                }
 
                 originalFileNameWithoutExtension = Path.GetFileNameWithoutExtension(pdfPath);
                 string signedPath = Path.Combine(originalPath, originalFileNameWithoutExtension + "_signed.pdf");
@@ -99,7 +105,7 @@ namespace PDFSignerApp.Helpers
                 string base64Signature = "woda";
 
                 string? originalPath = Path.GetDirectoryName(pdfPath);
-                if(originalPath == null)
+                if (originalPath == null)
                 {
                     message = "Error: Original path is null.";
                     return false;
@@ -158,8 +164,7 @@ namespace PDFSignerApp.Helpers
             }
         }
 
-
-        private byte[] DecryptPrivateKey(byte[] encryptedPrivateKey, byte[] salt, byte[] iv, string pin, out string message)
+        internal byte[] DecryptPrivateKey(byte[] encryptedPrivateKey, byte[] salt, byte[] iv, string pin, out string message)
         {
             byte[] decryptedPrivateKey = [];
             message = string.Empty;
@@ -167,13 +172,13 @@ namespace PDFSignerApp.Helpers
             try
             {
                 using Aes aes = Aes.Create();
-                
+
                 var pbkdf2 = new Rfc2898DeriveBytes(pin, salt, 100_000, HashAlgorithmName.SHA256);
                 var key = pbkdf2.GetBytes(aes.KeySize / 8);
                 aes.Key = key;
                 aes.IV = iv;
 
-                using(var decryptor = aes.CreateDecryptor())
+                using (var decryptor = aes.CreateDecryptor())
                 {
                     decryptedPrivateKey = decryptor.TransformFinalBlock(encryptedPrivateKey, 0, encryptedPrivateKey.Length);
                 }
