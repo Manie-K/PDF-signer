@@ -19,7 +19,7 @@ namespace PDFSignerApp
         public event Action<System.Windows.Media.Brush> OnMessageColorChanged = default;
 
         private string _PDFPath = "";
-        private string _publicKeyPath = "C:\\Users\\franc\\Desktop\\SEMESTR 6\\BSK\\PDF-signer\\Generated keys\\public_key.key";
+        private string _publicKeyPath = "";
         private string _msg = "";
 
         public RelayCommand VerifyPDFCommand { get; }

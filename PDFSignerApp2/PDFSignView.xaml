@@ -48,15 +48,24 @@
                 Command="{Binding SelectPDFCommand}"
         />
 
-        <!-- Info selected PDF -->
-        <Label Content="Selected PDF file" 
-               Grid.Row="2" 
+        <Grid Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <!-- Info selected PDF -->
+            <Label Content="Selected PDF file" 
+               Grid.Row="0" 
                Grid.Column="0" 
                Margin="10"
                HorizontalAlignment="Right"
                VerticalAlignment="Center"
                />
-        <TextBox Grid.Row="2" 
+            <TextBox Grid.Row="0" 
                  Grid.Column="1" 
                  Margin="10"
                  VerticalAlignment="Center" 
@@ -65,15 +74,15 @@
                  HorizontalAlignment="Left"
                  Text="{Binding PDFPath}"/>
 
-        <!-- Info key -->
-        <Label Content="Private key info" 
-               Grid.Row="3" 
+            <!-- Info key -->
+            <Label Content="Private key info" 
+               Grid.Row="1" 
                Grid.Column="0" 
                Margin="10"
                HorizontalAlignment="Right"
                VerticalAlignment="Center"
                />
-        <TextBox Grid.Row="3" 
+            <TextBox Grid.Row="1" 
                  Grid.Column="1" 
                  Margin="10"
                  VerticalAlignment="Center" 
@@ -81,7 +90,8 @@
                  HorizontalContentAlignment="Left"
                  HorizontalAlignment="Left"
                  Text="{Binding PrivateKeyPath}"/>
-
+        </Grid>
+        
         <!-- Sign button -->
         <Button Content="Sign PDF" 
                 Grid.ColumnSpan="2" 

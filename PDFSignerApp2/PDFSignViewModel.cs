@@ -18,7 +18,7 @@ namespace PDFSignerApp
 
         private string _pin = "0000";
         private string _PDFPath = "";
-        private string _privateKeyPath = "C:\\Users\\franc\\Desktop\\SEMESTR 6\\BSK\\PDF-signer\\Generated keys\\private_key.key";
+        private string _privateKeyPath = "";
         private string _msg = "";
 
         public RelayCommand SignPDFCommand { get; }
