@@ -23,6 +23,21 @@ namespace PDFSignerApp
         public PDFVerifyView()
         {
             InitializeComponent();
+            this.DataContextChanged += PDFVerifyView_DataContextChanged;
+        }
+
+        private void PDFVerifyView_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (e.NewValue is PDFVerifyViewModel vm)
+            {
+                if (vm != null)
+                {
+                    vm.OnMessageColorChanged += (Brush brush) =>
+                    {
+                        MsgTextBox.Foreground = brush;
+                    };
+                }
+            }
         }
     }
 }

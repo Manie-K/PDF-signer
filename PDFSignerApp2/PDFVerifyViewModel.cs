@@ -16,7 +16,6 @@ namespace PDFSignerApp
 {
     public class PDFVerifyViewModel : ObservableObject
     {
-        private const int PIN_LENGTH = 4;
         public event Action<System.Windows.Media.Brush> OnMessageColorChanged = default;
 
         private string _PDFPath = "";
@@ -25,6 +24,7 @@ namespace PDFSignerApp
 
         public RelayCommand VerifyPDFCommand { get; }
         public RelayCommand SelectPDFCommand { get; }
+        public RelayCommand SelectPKCommand { get; }
 
         public string PublicKeyPath
         {
@@ -38,7 +38,6 @@ namespace PDFSignerApp
                 }
             }
         }
-
         public string PDFPath
         {
             get => _PDFPath;
@@ -51,7 +50,6 @@ namespace PDFSignerApp
                 }
             }
         }
-
         public string Message
         {
             get => _msg;
@@ -65,7 +63,6 @@ namespace PDFSignerApp
                 }
             }
         }
-
         public bool IsMessageValid
         {
             get => _msg.Length > 0;
@@ -75,9 +72,10 @@ namespace PDFSignerApp
         {
             VerifyPDFCommand = new RelayCommand(() => TryToVerifyPDFSignature(), () => true);
             SelectPDFCommand = new RelayCommand(() => SelectPDFFile(), () => true);
+            SelectPKCommand = new RelayCommand(() => SelectPKFile(), () => true);
         }
 
-        public void SelectPDFFile()
+        private void SelectPDFFile()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "PDF files (*.pdf)|*.pdf";
@@ -88,8 +86,21 @@ namespace PDFSignerApp
                 string selectedFilePath = openFileDialog.FileName;
                 PDFPath = selectedFilePath;
             }
-
         }
+        private void SelectPKFile()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "KEY files (*.key)|*.key";
+            openFileDialog.Title = "Select a KEY file";
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string selectedFilePath = openFileDialog.FileName;
+                PublicKeyPath = selectedFilePath;
+            }
+        }
+
+
         private void TryToVerifyPDFSignature()
         {
             if (IsDataValid())
@@ -99,14 +110,15 @@ namespace PDFSignerApp
         }
         private bool IsDataValid()
         {
-            //Public key directory
+            OnMessageColorChanged?.Invoke(new SolidColorBrush(Colors.Red));
+            //Public key path
             if (String.IsNullOrEmpty(PublicKeyPath))
             {
                 Message = "Public key path must be selected";
                 return false;
             }
 
-            //PDF directory
+            //PDF path
             if (String.IsNullOrEmpty(PDFPath))
             {
                 Message = "PDF path must be selected";
@@ -168,9 +180,5 @@ namespace PDFSignerApp
                 Message = "Error while verifying signature";
             }
         }
-
-
-
-
     }
 }
