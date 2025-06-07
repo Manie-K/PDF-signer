@@ -185,7 +185,7 @@ namespace PDFSignerApp
                 using (PdfDocument pdfDoc = new PdfDocument(reader, writer))
                 {
                     PdfDocumentInfo info = pdfDoc.GetDocumentInfo();
-                    info.SetMoreInfo("Signature", Convert.ToBase64String(signature));
+                    //info.SetMoreInfo("Signature", Convert.ToBase64String(signature));
                 }
 
                 Message = "PDF signed successfully!";
