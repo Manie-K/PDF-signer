@@ -35,7 +35,6 @@ namespace PDFSignerApp
                 }
             }
         }
-
         public string PrivateKeyPath
         {
             get => _privateKeyPath;
@@ -48,7 +47,6 @@ namespace PDFSignerApp
                 }
             }
         }
-
         public string PDFPath
         {
             get => _PDFPath;
@@ -61,7 +59,6 @@ namespace PDFSignerApp
                 }
             }
         }
-
         public string Message
         {
             get => _msg;
@@ -75,7 +72,6 @@ namespace PDFSignerApp
                 }
             }
         }
-
         public bool IsMessageValid
         {
             get => _msg.Length > 0;
@@ -85,7 +81,7 @@ namespace PDFSignerApp
         {
             SignPDFCommand = new RelayCommand(() => TryToSignPDF(), () => true);
             SelectPDFCommand = new RelayCommand(() => SelectPDFFile(), () => true);
-            StartUSBWatcher();
+            EnableUSBWatcher();
         }
 
         public void SelectPDFFile()
@@ -104,7 +100,6 @@ namespace PDFSignerApp
 
         private void TryToSignPDF()
         {
-            //PrivateKeyPath = GetPrivateKeyPath();
             if (IsDataValid())
             {
                 SignPDF();
@@ -196,7 +191,6 @@ namespace PDFSignerApp
                 Message = "Error signing PDF.";
             }
         }
-
         private byte[] DecryptPrivateKey(byte[] encryptedPrivateKey, byte[] salt, byte[] iv)
         {
             string pin = Pin;
@@ -227,8 +221,26 @@ namespace PDFSignerApp
             return decryptedPrivateKey;
         }
 
-        private string FindPrivateKeyOnUSB()
+        private void EnableUSBWatcher()
         {
+            var insertQuery = new WqlEventQuery("SELECT * FROM Win32_VolumeChangeEvent WHERE EventType = 2");
+
+            var watcher = new ManagementEventWatcher(insertQuery);
+            watcher.EventArrived += (sender, e) =>
+            {
+                string? returnedPath = FindPrivateKeyOnUSB();
+                if (returnedPath != null)
+                {
+                    PrivateKeyPath = returnedPath;
+                    Message = "Private key found";
+                }
+            };
+
+            watcher.Start();
+        }
+        private string? FindPrivateKeyOnUSB()
+        {
+            OnMessageColorChanged?.Invoke(new SolidColorBrush(Colors.Red));
             foreach (var drive in DriveInfo.GetDrives())
             {
                 if (drive.DriveType == DriveType.Removable && drive.IsReady)
@@ -238,39 +250,24 @@ namespace PDFSignerApp
                         var keyFiles = Directory.GetFiles(drive.RootDirectory.FullName, "*.key", SearchOption.AllDirectories);
                         if (keyFiles.Length > 0)
                         {
+                            OnMessageColorChanged?.Invoke(new SolidColorBrush(Colors.Green));
                             return keyFiles[0];
                         }
                     }
-                    catch (UnauthorizedAccessException)
+                    catch (UnauthorizedAccessException ex)
                     {
-
+                        Debug.WriteLine($"Error with accesing the drive {drive.Name}: {ex.Message}");
+                        Message = $"Access denied to drive {drive.Name}. Please check permissions.";
                     }
                     catch (Exception ex)
                     {
                         Debug.WriteLine($"Error while scanning the drive {drive.Name}: {ex.Message}");
+                        Message = $"Error while scanning the drive {drive.Name}. Please try again.";
                     }
                 }
             }
 
             return null;
         }
-
-        private void StartUSBWatcher()
-        {
-            var insertQuery = new WqlEventQuery("SELECT * FROM Win32_VolumeChangeEvent WHERE EventType = 2");
-
-            var watcher = new ManagementEventWatcher(insertQuery);
-            watcher.EventArrived += (sender, e) =>
-            {
-                PrivateKeyPath = FindPrivateKeyOnUSB();
-                if (PrivateKeyPath != null)
-                {
-                    Message = "Private key found";
-                }
-            };
-
-            watcher.Start();
-        }
-
     }
 }
