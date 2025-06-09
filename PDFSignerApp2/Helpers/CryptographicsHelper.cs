@@ -49,13 +49,13 @@ namespace PDFSignerApp.Helpers
                 // 2. Read PDF file
 
                 string? originalPath = Path.GetDirectoryName(pdfPath);
-                if(originalPath == null)
+                if(pdfPath == null)
                 {
                     message = "Error: Original path is null.";
                     return false;
                 }
 
-                byte[] pdfBytes = File.ReadAllBytes(originalPath);
+                byte[] pdfBytes = File.ReadAllBytes(pdfPath);
 
 
                 // 3. Compute SHA256 hash of the PDF
@@ -91,7 +91,7 @@ namespace PDFSignerApp.Helpers
             }
             catch (Exception ex)
             {
-                message = $"Error signing PDF. {ex.Message}";
+                message = $"Error signing PDF: {ex.Message}";
                 return false;
             }
         }

@@ -20,7 +20,7 @@ namespace PDFSignerApp
 
         private string _pin = "0000";
         private string _PDFPath = "";
-        private string _privateKeyPath = "C:\\Studia\\BSK\\PDF-Signer\\Generated keys\\private_key.key";
+        private string _privateKeyPath = "";
         private string _msg = "";
 
         public RelayCommand SignPDFCommand { get; }
@@ -162,23 +162,37 @@ namespace PDFSignerApp
         private void EnableUSBWatcher()
         {
             var insertQuery = new WqlEventQuery("SELECT * FROM Win32_VolumeChangeEvent WHERE EventType = 2");
-
             var watcher = new ManagementEventWatcher(insertQuery);
-            watcher.EventArrived += (sender, e) =>
+
+            watcher.EventArrived += (sender, e) => CheckAndHandlePrivateKey();
+
+            watcher.Start();
+
+            CheckAndHandlePrivateKey();
+        }
+
+        private void CheckAndHandlePrivateKey()
+        {
+            Application.Current.Dispatcher.BeginInvoke(() =>
             {
                 string? returnedPath = FindPrivateKeyOnUSB();
+
                 if (returnedPath != null)
                 {
                     PrivateKeyPath = returnedPath;
+                    OnMessageColorChanged?.Invoke(new SolidColorBrush(Colors.Green));
                     Message = "Private key found";
                 }
-            };
-
-            watcher.Start();
+                else
+                {
+                    OnMessageColorChanged?.Invoke(new SolidColorBrush(Colors.Red));
+                    Message = "Private key not found on USB drive";
+                }
+            });
         }
+
         private string? FindPrivateKeyOnUSB()
         {
-            OnMessageColorChanged?.Invoke(new SolidColorBrush(Colors.Red));
             foreach (var drive in DriveInfo.GetDrives())
             {
                 if (drive.DriveType == DriveType.Removable && drive.IsReady)
@@ -188,19 +202,13 @@ namespace PDFSignerApp
                         var keyFiles = Directory.GetFiles(drive.RootDirectory.FullName, "*.key", SearchOption.AllDirectories);
                         if (keyFiles.Length > 0)
                         {
-                            OnMessageColorChanged?.Invoke(new SolidColorBrush(Colors.Green));
                             return keyFiles[0];
                         }
                     }
-                    catch (UnauthorizedAccessException ex)
-                    {
-                        Debug.WriteLine($"Error with accesing the drive {drive.Name}: {ex.Message}");
-                        Message = $"Access denied to drive {drive.Name}. Please check permissions.";
-                    }
                     catch (Exception ex)
                     {
-                        Debug.WriteLine($"Error while scanning the drive {drive.Name}: {ex.Message}");
-                        Message = $"Error while scanning the drive {drive.Name}. Please try again.";
+                        OnMessageColorChanged?.Invoke(new SolidColorBrush(Colors.Red));
+                        Message = $"Error while scanning the drive {drive.Name}: {ex.Message}";
                     }
                 }
             }
