@@ -1,0 +1,22 @@
+\doxysection{PDFSigner\+App\+::Helpers\+::Cryptographics\+Helper Class Reference}
+\hypertarget{class_p_d_f_signer_app_1_1_helpers_1_1_cryptographics_helper}{}\label{class_p_d_f_signer_app_1_1_helpers_1_1_cryptographics_helper}\index{PDFSignerApp::Helpers::CryptographicsHelper@{PDFSignerApp::Helpers::CryptographicsHelper}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_p_d_f_signer_app_1_1_helpers_1_1_cryptographics_helper_ae638ef2b4e8f43e45ed9520d21d2bd69}\label{class_p_d_f_signer_app_1_1_helpers_1_1_cryptographics_helper_ae638ef2b4e8f43e45ed9520d21d2bd69} 
+bool {\bfseries Sign\+PDF} (string pdf\+Path, string private\+Key\+Path, string pin, out string message)
+\item 
+\Hypertarget{class_p_d_f_signer_app_1_1_helpers_1_1_cryptographics_helper_a959cc6ac88b1efa19738903e8424db00}\label{class_p_d_f_signer_app_1_1_helpers_1_1_cryptographics_helper_a959cc6ac88b1efa19738903e8424db00} 
+bool {\bfseries Verify\+PDFSignature} (string signed\+PDFPath, string public\+Key\+Path, out string message)
+\item 
+\Hypertarget{class_p_d_f_signer_app_1_1_helpers_1_1_cryptographics_helper_a7bfe4dc3a88734ea44edd8d8cbee1cac}\label{class_p_d_f_signer_app_1_1_helpers_1_1_cryptographics_helper_a7bfe4dc3a88734ea44edd8d8cbee1cac} 
+internal byte\mbox{[}$\,$\mbox{]} {\bfseries Decrypt\+Private\+Key} (byte\mbox{[}$\,$\mbox{]} encrypted\+Private\+Key, byte\mbox{[}$\,$\mbox{]} salt, byte\mbox{[}$\,$\mbox{]} iv, string pin, out string message)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Helper class for cryptographic operations related to PDF signing and verification. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+PDFSigner\+App2/\+Helpers/Cryptographics\+Helper.\+cs\end{DoxyCompactItemize}

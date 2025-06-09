@@ -7,10 +7,17 @@ using KeyGeneratorApp.Helpers;
 
 namespace KeyGeneratorApp
 {
+    /// <summary>
+    /// ViewModel for the main window of the Key Generator application.
+    /// </summary>
     internal class MainViewModel : ObservableObject
     {
         private const int PIN_LENGTH = 4;
         private const string keyFileExtension = ".key";
+
+        /// <summary>
+        /// Event triggered when the message color is changed.
+        /// </summary>
         public event Action<System.Windows.Media.Brush>? OnMessageColorChanged;
 
         private string _pin = "0000";
@@ -19,8 +26,14 @@ namespace KeyGeneratorApp
         private string _publicKeyFileName = "";
         private string _msg = "";
 
+        /// <summary>
+        /// <see cref="RelayCommand"/> for generating private and public keys.
+        /// </summary>
         public RelayCommand GenerateKeysCommand { get; }
 
+        /// <summary>
+        /// Represents the PIN used for encrypting the private key.
+        /// </summary>
         public string Pin
         {
             get => _pin;
@@ -34,6 +47,9 @@ namespace KeyGeneratorApp
             }
         }
 
+        /// <summary>
+        /// Represents the directory where the generated keys will be saved.
+        /// </summary>
         public string OutputDirectory
         {
             get => _outputPath;
@@ -47,6 +63,10 @@ namespace KeyGeneratorApp
             }
         }
 
+
+        /// <summary>
+        /// Represents the file name for the private key.
+        /// </summary>
         public string PrivateKeyFileName
         {
             get => _privateKeyFileName;
@@ -60,6 +80,9 @@ namespace KeyGeneratorApp
             }
         }
 
+        /// <summary>
+        /// Represents the file name for the public key.
+        /// </summary>
         public string PublicKeyFileName
         {
             get => _publicKeyFileName;
@@ -73,6 +96,9 @@ namespace KeyGeneratorApp
             }
         }
 
+        /// <summary>
+        /// Represents the message displayed to the user, indicating the status of key generation or errors.
+        /// </summary>
         public string Message
         {
             get => _msg;
@@ -86,16 +112,26 @@ namespace KeyGeneratorApp
                 }
             }
         }
+
+        /// <summary>
+        /// Indicates if the message should be shown to the user
+        /// </summary>
         public bool IsMessageValid
         {
             get => _msg.Length > 0;
         }
 
+        /// <summary>
+        /// Parameterless constructor for the MainViewModel class.
+        /// </summary>
         public MainViewModel()
         {
             GenerateKeysCommand = new RelayCommand(TryToGenerateKeys, () => true);
         }
 
+        /// <summary>
+        /// Shows a dialog for selecting the output directory where the keys will be saved.
+        /// </summary>
         public void SelectDirectory()
         {
             using (FolderBrowserDialog folderDialog = new FolderBrowserDialog())

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PDFSignerApp.PDFVerify;
 
 namespace PDFSignerApp
 {
@@ -20,6 +21,9 @@ namespace PDFSignerApp
     /// </summary>
     public partial class PDFVerifyView : UserControl
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PDFVerifyView"/> class.
+        /// </summary>
         public PDFVerifyView()
         {
             InitializeComponent();

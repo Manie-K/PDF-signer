@@ -10,8 +10,14 @@ using System.Windows.Shapes;
 
 namespace KeyGeneratorApp
 {
+    /// <summary>
+    /// View for the main window of the Key Generator application.
+    /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// Generates a new instance of the MainWindow class and initializes the DataContext with MainViewModel.
+        /// </summary>
         public MainWindow()
         {
             DataContext = new MainViewModel();

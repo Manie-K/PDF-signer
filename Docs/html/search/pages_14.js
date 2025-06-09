@@ -1,0 +1,8 @@
+var searchData=
+[
+  ['network_20interaction_20use_20with_20the_20gnu_20general_20public_20license_0',['Network Interaction Use with the GNU General Public License',['../md_packages_2itext_89_82_80_2gnu-agpl-v3_80.html#autotoc_md15',1,'13. Remote Network Interaction; Use with the GNU General Public License'],['../md_packages_2itext7_89_82_80_2gnu-agpl-v3_80.html#autotoc_md36',1,'13. Remote Network Interaction; Use with the GNU General Public License']]],
+  ['new_20programs_1',['New Programs',['../md_packages_2itext_89_82_80_2gnu-agpl-v3_80.html#autotoc_md20',1,'How to Apply These Terms to Your New Programs'],['../md_packages_2itext7_89_82_80_2gnu-agpl-v3_80.html#autotoc_md41',1,'How to Apply These Terms to Your New Programs']]],
+  ['no_20surrender_20of_20others_20freedom_2',['No Surrender of Others Freedom',['../md_packages_2itext_89_82_80_2gnu-agpl-v3_80.html#autotoc_md14',1,'12. No Surrender of Others' Freedom'],['../md_packages_2itext7_89_82_80_2gnu-agpl-v3_80.html#autotoc_md35',1,'12. No Surrender of Others' Freedom']]],
+  ['non_20source_20forms_3',['Non Source Forms',['../md_packages_2itext_89_82_80_2gnu-agpl-v3_80.html#autotoc_md8',1,'6. Conveying Non-Source Forms'],['../md_packages_2itext7_89_82_80_2gnu-agpl-v3_80.html#autotoc_md29',1,'6. Conveying Non-Source Forms']]],
+  ['not_20required_20for_20having_20copies_4',['Not Required for Having Copies',['../md_packages_2itext_89_82_80_2gnu-agpl-v3_80.html#autotoc_md11',1,'9. Acceptance Not Required for Having Copies'],['../md_packages_2itext7_89_82_80_2gnu-agpl-v3_80.html#autotoc_md32',1,'9. Acceptance Not Required for Having Copies']]]
+];

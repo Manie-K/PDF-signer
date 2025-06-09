@@ -1,0 +1,12 @@
+var searchData=
+[
+  ['acceptance_20not_20required_20for_20having_20copies_0',['Acceptance Not Required for Having Copies',['../md_packages_2itext_89_82_80_2gnu-agpl-v3_80.html#autotoc_md11',1,'9. Acceptance Not Required for Having Copies'],['../md_packages_2itext7_89_82_80_2gnu-agpl-v3_80.html#autotoc_md32',1,'9. Acceptance Not Required for Having Copies']]],
+  ['additional_20terms_1',['Additional Terms',['../md_packages_2itext_89_82_80_2gnu-agpl-v3_80.html#autotoc_md9',1,'7. Additional Terms'],['../md_packages_2itext7_89_82_80_2gnu-agpl-v3_80.html#autotoc_md30',1,'7. Additional Terms']]],
+  ['affero_20general_20public_20license_2',['Affero General Public License',['../md_packages_2itext_89_82_80_2gnu-agpl-v3_80.html',1,'GNU Affero General Public License'],['../md_packages_2itext7_89_82_80_2gnu-agpl-v3_80.html',1,'GNU Affero General Public License']]],
+  ['and_2016_3',['and 16',['../md_packages_2itext_89_82_80_2gnu-agpl-v3_80.html#autotoc_md19',1,'17. Interpretation of Sections 15 and 16'],['../md_packages_2itext7_89_82_80_2gnu-agpl-v3_80.html#autotoc_md40',1,'17. Interpretation of Sections 15 and 16']]],
+  ['and_20conditions_4',['AND CONDITIONS',['../md_packages_2itext_89_82_80_2gnu-agpl-v3_80.html#autotoc_md1',1,'TERMS AND CONDITIONS'],['../md_packages_2itext7_89_82_80_2gnu-agpl-v3_80.html#autotoc_md22',1,'TERMS AND CONDITIONS']]],
+  ['anti_20circumvention_20law_5',['Anti Circumvention Law',['../md_packages_2itext_89_82_80_2gnu-agpl-v3_80.html#autotoc_md5',1,'3. Protecting Users' Legal Rights From Anti-Circumvention Law'],['../md_packages_2itext7_89_82_80_2gnu-agpl-v3_80.html#autotoc_md26',1,'3. Protecting Users' Legal Rights From Anti-Circumvention Law']]],
+  ['apply_20these_20terms_20to_20your_20new_20programs_6',['Apply These Terms to Your New Programs',['../md_packages_2itext_89_82_80_2gnu-agpl-v3_80.html#autotoc_md20',1,'How to Apply These Terms to Your New Programs'],['../md_packages_2itext7_89_82_80_2gnu-agpl-v3_80.html#autotoc_md41',1,'How to Apply These Terms to Your New Programs']]],
+  ['authors_7',['Authors',['../md__r_e_a_d_m_e.html#autotoc_md44',1,'']]],
+  ['automatic_20licensing_20of_20downstream_20recipients_8',['Automatic Licensing of Downstream Recipients',['../md_packages_2itext_89_82_80_2gnu-agpl-v3_80.html#autotoc_md12',1,'10. Automatic Licensing of Downstream Recipients'],['../md_packages_2itext7_89_82_80_2gnu-agpl-v3_80.html#autotoc_md33',1,'10. Automatic Licensing of Downstream Recipients']]]
+];

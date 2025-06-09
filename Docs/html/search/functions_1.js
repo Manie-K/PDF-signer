@@ -1,0 +1,5 @@
+var searchData=
+[
+  ['createdelegate_0',['CreateDelegate',['../class_xaml_generated_namespace_1_1_generated_internal_type_helper.html#a80ccb16004a2d755c66edeb9b37c2bb5',1,'XamlGeneratedNamespace::GeneratedInternalTypeHelper::CreateDelegate(System.Type delegateType, object target, string handler)'],['../class_xaml_generated_namespace_1_1_generated_internal_type_helper.html#a80ccb16004a2d755c66edeb9b37c2bb5',1,'XamlGeneratedNamespace::GeneratedInternalTypeHelper::CreateDelegate(System.Type delegateType, object target, string handler)']]],
+  ['createinstance_1',['CreateInstance',['../class_xaml_generated_namespace_1_1_generated_internal_type_helper.html#a7f5afb1f3a442b0b8dfacc84697f17e9',1,'XamlGeneratedNamespace::GeneratedInternalTypeHelper::CreateInstance(System.Type type, System.Globalization.CultureInfo culture)'],['../class_xaml_generated_namespace_1_1_generated_internal_type_helper.html#a7f5afb1f3a442b0b8dfacc84697f17e9',1,'XamlGeneratedNamespace::GeneratedInternalTypeHelper::CreateInstance(System.Type type, System.Globalization.CultureInfo culture)']]]
+];

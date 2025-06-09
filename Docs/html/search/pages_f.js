@@ -1,0 +1,6 @@
+var searchData=
+[
+  ['general_20public_20license_0',['General Public License',['../md_packages_2itext_89_82_80_2gnu-agpl-v3_80.html#autotoc_md15',1,'13. Remote Network Interaction; Use with the GNU General Public License'],['../md_packages_2itext7_89_82_80_2gnu-agpl-v3_80.html#autotoc_md36',1,'13. Remote Network Interaction; Use with the GNU General Public License'],['../md_packages_2itext_89_82_80_2gnu-agpl-v3_80.html',1,'GNU Affero General Public License'],['../md_packages_2itext7_89_82_80_2gnu-agpl-v3_80.html',1,'GNU Affero General Public License']]],
+  ['gnu_20affero_20general_20public_20license_1',['GNU Affero General Public License',['../md_packages_2itext_89_82_80_2gnu-agpl-v3_80.html',1,'GNU Affero General Public License'],['../md_packages_2itext7_89_82_80_2gnu-agpl-v3_80.html',1,'GNU Affero General Public License']]],
+  ['gnu_20general_20public_20license_2',['GNU General Public License',['../md_packages_2itext_89_82_80_2gnu-agpl-v3_80.html#autotoc_md15',1,'13. Remote Network Interaction; Use with the GNU General Public License'],['../md_packages_2itext7_89_82_80_2gnu-agpl-v3_80.html#autotoc_md36',1,'13. Remote Network Interaction; Use with the GNU General Public License']]]
+];

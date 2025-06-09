@@ -1,0 +1,10 @@
+var searchData=
+[
+  ['circumvention_20law_0',['Circumvention Law',['../md_packages_2itext_89_82_80_2gnu-agpl-v3_80.html#autotoc_md5',1,'3. Protecting Users' Legal Rights From Anti-Circumvention Law'],['../md_packages_2itext7_89_82_80_2gnu-agpl-v3_80.html#autotoc_md26',1,'3. Protecting Users' Legal Rights From Anti-Circumvention Law']]],
+  ['code_1',['Code',['../md_packages_2itext_89_82_80_2gnu-agpl-v3_80.html#autotoc_md3',1,'1. Source Code'],['../md_packages_2itext7_89_82_80_2gnu-agpl-v3_80.html#autotoc_md24',1,'1. Source Code']]],
+  ['conditions_2',['CONDITIONS',['../md_packages_2itext_89_82_80_2gnu-agpl-v3_80.html#autotoc_md1',1,'TERMS AND CONDITIONS'],['../md_packages_2itext7_89_82_80_2gnu-agpl-v3_80.html#autotoc_md22',1,'TERMS AND CONDITIONS']]],
+  ['conveying_20modified_20source_20versions_3',['Conveying Modified Source Versions',['../md_packages_2itext_89_82_80_2gnu-agpl-v3_80.html#autotoc_md7',1,'5. Conveying Modified Source Versions'],['../md_packages_2itext7_89_82_80_2gnu-agpl-v3_80.html#autotoc_md28',1,'5. Conveying Modified Source Versions']]],
+  ['conveying_20non_20source_20forms_4',['Conveying Non Source Forms',['../md_packages_2itext_89_82_80_2gnu-agpl-v3_80.html#autotoc_md8',1,'6. Conveying Non-Source Forms'],['../md_packages_2itext7_89_82_80_2gnu-agpl-v3_80.html#autotoc_md29',1,'6. Conveying Non-Source Forms']]],
+  ['conveying_20verbatim_20copies_5',['Conveying Verbatim Copies',['../md_packages_2itext_89_82_80_2gnu-agpl-v3_80.html#autotoc_md6',1,'4. Conveying Verbatim Copies'],['../md_packages_2itext7_89_82_80_2gnu-agpl-v3_80.html#autotoc_md27',1,'4. Conveying Verbatim Copies']]],
+  ['copies_6',['Copies',['../md_packages_2itext_89_82_80_2gnu-agpl-v3_80.html#autotoc_md6',1,'4. Conveying Verbatim Copies'],['../md_packages_2itext7_89_82_80_2gnu-agpl-v3_80.html#autotoc_md27',1,'4. Conveying Verbatim Copies'],['../md_packages_2itext_89_82_80_2gnu-agpl-v3_80.html#autotoc_md11',1,'9. Acceptance Not Required for Having Copies'],['../md_packages_2itext7_89_82_80_2gnu-agpl-v3_80.html#autotoc_md32',1,'9. Acceptance Not Required for Having Copies']]]
+];

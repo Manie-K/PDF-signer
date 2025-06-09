@@ -2,11 +2,17 @@
 using PDFSignerApp.Helpers;
 using System.Windows.Media;
 
-namespace PDFSignerApp
+namespace PDFSignerApp.PDFVerify
 {
+    /// <summary>
+    /// ViewModel for verifying PDF signatures view.
+    /// </summary>
     public class PDFVerifyViewModel : ObservableObject
     {
-        public event Action<System.Windows.Media.Brush>? OnMessageColorChanged;
+        /// <summary>
+        /// Event that is triggered when the message color changes.
+        /// </summary>
+        public event Action<Brush>? OnMessageColorChanged;
 
         private readonly CryptographicsHelper _crypto;
 
@@ -14,10 +20,25 @@ namespace PDFSignerApp
         private string _publicKeyPath = "";
         private string _msg = "";
 
+        /// <summary>
+        /// <see cref="RelayCommand"/> for verifying pdf file.
+        /// </summary>
         public RelayCommand VerifyPDFCommand { get; }
+
+        /// <summary>
+        /// <see cref="RelayCommand"/> for selecting pdf file.
+        /// </summary>
         public RelayCommand SelectPDFCommand { get; }
+
+        /// <summary>
+        /// <see cref="RelayCommand"/> for selecting public key file.
+        /// </summary>
         public RelayCommand SelectPKCommand { get; }
 
+
+        /// <summary>
+        /// Represents the path to the public key file used for verifying the PDF signature.
+        /// </summary>
         public string PublicKeyPath
         {
             get => _publicKeyPath;
@@ -30,6 +51,10 @@ namespace PDFSignerApp
                 }
             }
         }
+        
+        /// <summary>
+        /// Represents the path to the PDF file that needs to be verified.
+        /// </summary>
         public string PDFPath
         {
             get => _PDFPath;
@@ -42,6 +67,10 @@ namespace PDFSignerApp
                 }
             }
         }
+
+        /// <summary>
+        /// Represents the message displayed to the user, indicating the status of pdf verification or errors.
+        /// </summary>
         public string Message
         {
             get => _msg;
@@ -55,11 +84,18 @@ namespace PDFSignerApp
                 }
             }
         }
+
+        /// <summary>
+        /// Indicates if the message should be shown to the user
+        /// </summary>
         public bool IsMessageValid
         {
             get => _msg.Length > 0;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PDFVerifyViewModel"/> class.
+        /// </summary>
         public PDFVerifyViewModel()
         {
             _crypto = new CryptographicsHelper();
@@ -99,8 +135,8 @@ namespace PDFSignerApp
             {
                 bool success = _crypto.VerifyPDFSignature(PDFPath, PublicKeyPath, out string message);
                 Message = message;
-                
-                if(success)
+
+                if (success)
                 {
                     OnMessageColorChanged?.Invoke(new SolidColorBrush(Colors.Green));
                 }
@@ -115,14 +151,14 @@ namespace PDFSignerApp
         {
             OnMessageColorChanged?.Invoke(new SolidColorBrush(Colors.Red));
             //Public key path
-            if (String.IsNullOrEmpty(PublicKeyPath))
+            if (string.IsNullOrEmpty(PublicKeyPath))
             {
                 Message = "Public key path must be selected";
                 return false;
             }
 
             //PDF path
-            if (String.IsNullOrEmpty(PDFPath))
+            if (string.IsNullOrEmpty(PDFPath))
             {
                 Message = "PDF path must be selected";
                 return false;

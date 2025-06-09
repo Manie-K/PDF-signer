@@ -11,9 +11,16 @@ using System.Linq.Expressions;
 
 namespace PDFSignerApp
 {
+    /// <summary>
+    /// ViewModel for signing PDF files with a digital signature.
+    /// </summary>
     public class PDFSignViewModel : ObservableObject
     {
         private const int PIN_LENGTH = 4;
+
+        /// <summary>
+        /// Event triggered when the message color is changed.
+        /// </summary>
         public event Action<System.Windows.Media.Brush>? OnMessageColorChanged;
 
         private readonly CryptographicsHelper _crypto;
@@ -23,9 +30,20 @@ namespace PDFSignerApp
         private string _privateKeyPath = "";
         private string _msg = "";
 
+        /// <summary>
+        /// <see cref="RelayCommand"/> for signing the PDF file.
+        /// </summary>
         public RelayCommand SignPDFCommand { get; }
+
+        /// <summary>
+        /// <see cref="RelayCommand"/> for selecting the PDF file to be signed."/>
+        /// </summary>
         public RelayCommand SelectPDFCommand { get; }
-       
+
+
+        /// <summary>
+        /// Represents the PIN used in encryption of private key.
+        /// </summary>
         public string Pin
         {
             get => _pin;
@@ -38,6 +56,10 @@ namespace PDFSignerApp
                 }
             }
         }
+
+        /// <summary>
+        /// Represents the path to the private key file.
+        /// </summary>  
         public string PrivateKeyPath
         {
             get => _privateKeyPath;
@@ -50,6 +72,10 @@ namespace PDFSignerApp
                 }
             }
         }
+
+        /// <summary>
+        /// Represents the path to the PDF file to be signed.
+        /// </summary>
         public string PDFPath
         {
             get => _PDFPath;
@@ -62,6 +88,10 @@ namespace PDFSignerApp
                 }
             }
         }
+
+        /// <summary>
+        /// Represents the message displayed to the user, indicating the status of pdf signing process or errors.
+        /// </summary>
         public string Message
         {
             get => _msg;
@@ -75,11 +105,19 @@ namespace PDFSignerApp
                 }
             }
         }
+
+        /// <summary>
+        /// Indicates if the message should be shown to the user
+        /// </summary>
         public bool IsMessageValid
         {
             get => _msg.Length > 0;
         }
 
+        /// <summary>
+        /// Parameterless constructor for PDFSignViewModel, 
+        /// initializes commands and sets up USB watcher for detection of private key on USB.
+        /// </summary>
         public PDFSignViewModel()
         {
             _crypto = new CryptographicsHelper();
@@ -88,7 +126,7 @@ namespace PDFSignerApp
             EnableUSBWatcher();
         }
 
-        public void SelectPDFFile()
+        private void SelectPDFFile()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "PDF files (*.pdf)|*.pdf";
@@ -99,7 +137,6 @@ namespace PDFSignerApp
                 string selectedFilePath = openFileDialog.FileName;
                 PDFPath = selectedFilePath;
             }
-
         }
 
         private void TryToSignPDF()

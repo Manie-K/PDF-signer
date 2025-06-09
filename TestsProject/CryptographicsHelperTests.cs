@@ -3,6 +3,9 @@ using PDFSignerApp.Helpers;
 
 namespace TestsProject
 {
+    /// <summary>
+    /// Unit tests for the CryptographicsHelper class
+    /// </summary>
     [TestClass]
     public sealed class CryptographicsHelperTests
     {
@@ -24,6 +27,9 @@ namespace TestsProject
 
         }
 
+        /// <summary>
+        /// Tests if decrypting a private key with a valid PIN returns the correct decrypted key.
+        /// </summary>
         [TestMethod]
         public void DecryptPrivateKey_ReturnsCorrectDecryptedKey()
         {

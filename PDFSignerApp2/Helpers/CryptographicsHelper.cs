@@ -5,14 +5,31 @@ using iText.Signatures;
 
 namespace PDFSignerApp.Helpers
 {
+    /// <summary>
+    /// Helper class for cryptographic operations related to PDF signing and verification.
+    /// </summary>
     public class CryptographicsHelper
     {
         const int SignatureBytesCount = 512;
+
+        /// <summary>
+        /// Parameterless constructor for CryptographicsHelper.
+        /// </summary>
         public CryptographicsHelper()
         {
 
         }
 
+        /// <summary>
+        /// Signs a PDF file and saves it.
+        /// <paramref name="pdfPath"/> is the path to the PDF file to be signed.
+        /// <paramref name="privateKeyPath"/> is the path to the encrypted private key file.
+        /// <paramref name="pin"/> is used to decrypt the private key.
+        /// <paramref name="message"/> is an output parameter that will contain the result message of the signing operation.
+        /// </summary>
+        /// <returns> True if the signing operation was successful, False otherwise. </returns>
+        /// <remarks> The signed pdf file will be places in the same directory as the original pdf, and will be named 
+        /// *original_name*_signed.pdf </remarks>
         public bool SignPDF(string pdfPath, string privateKeyPath, string pin, out string message)
         {
             message = "Signing PDF...";
@@ -49,9 +66,14 @@ namespace PDFSignerApp.Helpers
                 // 2. Read PDF file
 
                 string? originalPath = Path.GetDirectoryName(pdfPath);
-                if(pdfPath == null)
+                if(originalPath == null)
                 {
                     message = "Error: Original path is null.";
+                    return false;
+                }
+                if (!File.Exists(pdfPath))
+                {
+                    message = "PDF file does not exist.";
                     return false;
                 }
 
@@ -96,6 +118,14 @@ namespace PDFSignerApp.Helpers
             }
         }
 
+        /// <summary>
+        /// Verifies a signed PDF file.
+        /// <paramref name="signedPDFPath"/> is the path to the PDF file which should be verified.
+        /// <paramref name="publicKeyPath"/> is the path to the public key file.
+        /// <paramref name="message"/> is an output parameter that will contain the result message of the verification.
+        /// </summary>
+        /// <returns> True if the PDF file is authentic, False otherwise. </returns>
+    
         public bool VerifyPDFSignature(string signedPDFPath, string publicKeyPath, out string message)
         {
             // 1. Read the signed PDF file

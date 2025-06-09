@@ -20,6 +20,9 @@ namespace PDFSignerApp
     /// </summary>
     public partial class PDFSignView : UserControl
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PDFSignView"/> class.
+        /// </summary>
         public PDFSignView()
         {
             InitializeComponent();
