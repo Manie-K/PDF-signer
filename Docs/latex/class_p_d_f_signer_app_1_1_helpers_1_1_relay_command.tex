@@ -1,5 +1,10 @@
 \doxysection{PDFSigner\+App\+::Helpers\+::Relay\+Command Class Reference}
 \hypertarget{class_p_d_f_signer_app_1_1_helpers_1_1_relay_command}{}\label{class_p_d_f_signer_app_1_1_helpers_1_1_relay_command}\index{PDFSignerApp::Helpers::RelayCommand@{PDFSignerApp::Helpers::RelayCommand}}
+
+
+A command that can be bound to UI elements, allowing for execution of actions with optional conditions.  
+
+
 Inheritance diagram for PDFSigner\+App\+::Helpers\+::Relay\+Command\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -11,13 +16,12 @@ Inheritance diagram for PDFSigner\+App\+::Helpers\+::Relay\+Command\+:\begin{fig
 \item 
 \Hypertarget{class_p_d_f_signer_app_1_1_helpers_1_1_relay_command_a25ffddf2225455742e455088968d825b}\label{class_p_d_f_signer_app_1_1_helpers_1_1_relay_command_a25ffddf2225455742e455088968d825b} 
 {\bfseries Relay\+Command} (Action execute, Func$<$ bool $>$ can\+Execute)
-\item 
-\Hypertarget{class_p_d_f_signer_app_1_1_helpers_1_1_relay_command_a77db33834fb1ced3a655a056a466b3b2}\label{class_p_d_f_signer_app_1_1_helpers_1_1_relay_command_a77db33834fb1ced3a655a056a466b3b2} 
-bool {\bfseries Can\+Execute} (object? parameter)
-\item 
+\begin{DoxyCompactList}\small\item\em Consturctor for \doxylink{class_p_d_f_signer_app_1_1_helpers_1_1_relay_command}{Relay\+Command} that takes an action to execute and a function to determine if it can execute. {\itshape can\+Execute}  Represents a function that returns a boolean indicating whether the command can execute. {\itshape execute}  Represents the action to execute when the command is invoked. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_p_d_f_signer_app_1_1_helpers_1_1_relay_command_a77db33834fb1ced3a655a056a466b3b2}{Can\+Execute}} (object? parameter)
+\begin{DoxyCompactList}\small\item\em Tests whether the command can execute in its current state. \end{DoxyCompactList}\item 
 \Hypertarget{class_p_d_f_signer_app_1_1_helpers_1_1_relay_command_a942d39efbe8e0ce0b69dab1e9e842c0d}\label{class_p_d_f_signer_app_1_1_helpers_1_1_relay_command_a942d39efbe8e0ce0b69dab1e9e842c0d} 
 void {\bfseries Execute} (object? parameter)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Executes the command. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -26,6 +30,29 @@ event Event\+Handler \mbox{\hyperlink{class_p_d_f_signer_app_1_1_helpers_1_1_rel
 \Hypertarget{class_p_d_f_signer_app_1_1_helpers_1_1_relay_command_a96efb299daffad911ea3dc54f9c97b5f}\label{class_p_d_f_signer_app_1_1_helpers_1_1_relay_command_a96efb299daffad911ea3dc54f9c97b5f} 
 {\bfseries remove} =$>$ Command\+Manager.\+Requery\+Suggested -\/= value
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A command that can be bound to UI elements, allowing for execution of actions with optional conditions. 
+
+Buttons in \doxylink{class_p_d_f_signer_app_1_1_p_d_f_sign_view}{PDFSign\+View} view. 
+
+\label{doc-func-members}
+\Hypertarget{class_p_d_f_signer_app_1_1_helpers_1_1_relay_command_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_p_d_f_signer_app_1_1_helpers_1_1_relay_command_a77db33834fb1ced3a655a056a466b3b2}\index{PDFSignerApp::Helpers::RelayCommand@{PDFSignerApp::Helpers::RelayCommand}!CanExecute@{CanExecute}}
+\index{CanExecute@{CanExecute}!PDFSignerApp::Helpers::RelayCommand@{PDFSignerApp::Helpers::RelayCommand}}
+\doxysubsubsection{\texorpdfstring{CanExecute()}{CanExecute()}}
+{\footnotesize\ttfamily \label{class_p_d_f_signer_app_1_1_helpers_1_1_relay_command_a77db33834fb1ced3a655a056a466b3b2} 
+bool PDFSigner\+App\+::\+Helpers\+::\+Relay\+Command\+::\+Can\+Execute (\begin{DoxyParamCaption}\item[{object?}]{parameter}{}\end{DoxyParamCaption})}
+
+
+
+Tests whether the command can execute in its current state. 
+
+\begin{DoxyReturn}{Returns}
+True if command can execute, False otherwise. 
+\end{DoxyReturn}
 
 
 \label{doc-variable-members}

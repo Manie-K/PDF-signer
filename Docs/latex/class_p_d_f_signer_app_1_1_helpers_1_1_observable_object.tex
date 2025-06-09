@@ -1,5 +1,10 @@
 \doxysection{PDFSigner\+App\+::Helpers\+::Observable\+Object Class Reference}
 \hypertarget{class_p_d_f_signer_app_1_1_helpers_1_1_observable_object}{}\label{class_p_d_f_signer_app_1_1_helpers_1_1_observable_object}\index{PDFSignerApp::Helpers::ObservableObject@{PDFSignerApp::Helpers::ObservableObject}}
+
+
+Base class for objects that implement property change notification.  
+
+
 Inheritance diagram for PDFSigner\+App\+::Helpers\+::Observable\+Object\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -11,7 +16,7 @@ Inheritance diagram for PDFSigner\+App\+::Helpers\+::Observable\+Object\+:\begin
 \item 
 \Hypertarget{class_p_d_f_signer_app_1_1_helpers_1_1_observable_object_a4c631129a2deae27da579acc7fed2de2}\label{class_p_d_f_signer_app_1_1_helpers_1_1_observable_object_a4c631129a2deae27da579acc7fed2de2} 
 event Property\+Changed\+Event\+Handler {\bfseries Property\+Changed}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Notifies subscribers that a property value has changed. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -19,6 +24,11 @@ event Property\+Changed\+Event\+Handler {\bfseries Property\+Changed}
 virtual void {\bfseries On\+Property\+Changed} (\mbox{[}Caller\+Member\+Name\mbox{]} string? property\+Name=null)
 \end{DoxyCompactItemize}
 
+
+\doxysubsection{Detailed Description}
+Base class for objects that implement property change notification. 
+
+\doxylink{class_p_d_f_signer_app_1_1_main_view_model}{Main\+View\+Model} inherits from \doxylink{class_p_d_f_signer_app_1_1_helpers_1_1_observable_object}{Observable\+Object} to notify the view of property changes. 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

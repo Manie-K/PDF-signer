@@ -92,19 +92,90 @@ $(function(){initNavTree('class_p_d_f_signer_app_1_1_helpers_1_1_cryptographics_
   <div class="headertitle"><div class="title">PDFSignerApp::Helpers::CryptographicsHelper Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Helper class for cryptographic operations related to PDF signing and verification.  
+ <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae638ef2b4e8f43e45ed9520d21d2bd69" id="r_ae638ef2b4e8f43e45ed9520d21d2bd69"><td class="memItemLeft" align="right" valign="top"><a id="ae638ef2b4e8f43e45ed9520d21d2bd69" name="ae638ef2b4e8f43e45ed9520d21d2bd69"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>SignPDF</b> (string pdfPath, string privateKeyPath, string pin, out string message)</td></tr>
-<tr class="memitem:a959cc6ac88b1efa19738903e8424db00" id="r_a959cc6ac88b1efa19738903e8424db00"><td class="memItemLeft" align="right" valign="top"><a id="a959cc6ac88b1efa19738903e8424db00" name="a959cc6ac88b1efa19738903e8424db00"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>VerifyPDFSignature</b> (string signedPDFPath, string publicKeyPath, out string message)</td></tr>
+<tr class="memitem:add49797fb7c86de74c5738bdcac31932" id="r_add49797fb7c86de74c5738bdcac31932"><td class="memItemLeft" align="right" valign="top"><a id="add49797fb7c86de74c5738bdcac31932" name="add49797fb7c86de74c5738bdcac31932"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>CryptographicsHelper</b> ()</td></tr>
+<tr class="memdesc:add49797fb7c86de74c5738bdcac31932"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parameterless constructor for <a class="el" href="class_p_d_f_signer_app_1_1_helpers_1_1_cryptographics_helper.html" title="Helper class for cryptographic operations related to PDF signing and verification.">CryptographicsHelper</a>. <br /></td></tr>
+<tr class="memitem:ae638ef2b4e8f43e45ed9520d21d2bd69" id="r_ae638ef2b4e8f43e45ed9520d21d2bd69"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae638ef2b4e8f43e45ed9520d21d2bd69">SignPDF</a> (string pdfPath, string privateKeyPath, string pin, out string message)</td></tr>
+<tr class="memdesc:ae638ef2b4e8f43e45ed9520d21d2bd69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Signs a PDF file and saves it. <em>pdfPath</em>  is the path to the PDF file to be signed. <em>privateKeyPath</em>  is the path to the encrypted private key file. <em>pin</em>  is used to decrypt the private key. <em>message</em>  is an output parameter that will contain the result message of the signing operation.  <br /></td></tr>
+<tr class="memitem:a959cc6ac88b1efa19738903e8424db00" id="r_a959cc6ac88b1efa19738903e8424db00"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a959cc6ac88b1efa19738903e8424db00">VerifyPDFSignature</a> (string signedPDFPath, string publicKeyPath, out string message)</td></tr>
+<tr class="memdesc:a959cc6ac88b1efa19738903e8424db00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies a signed PDF file. <em>signedPDFPath</em>  is the path to the PDF file which should be verified. <em>publicKeyPath</em>  is the path to the public key file. <em>message</em>  is an output parameter that will contain the result message of the verification.  <br /></td></tr>
 <tr class="memitem:a7bfe4dc3a88734ea44edd8d8cbee1cac" id="r_a7bfe4dc3a88734ea44edd8d8cbee1cac"><td class="memItemLeft" align="right" valign="top"><a id="a7bfe4dc3a88734ea44edd8d8cbee1cac" name="a7bfe4dc3a88734ea44edd8d8cbee1cac"></a>
 internal byte[]&#160;</td><td class="memItemRight" valign="bottom"><b>DecryptPrivateKey</b> (byte[] encryptedPrivateKey, byte[] salt, byte[] iv, string pin, out string message)</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Helper class for cryptographic operations related to PDF signing and verification. </p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="ae638ef2b4e8f43e45ed9520d21d2bd69" name="ae638ef2b4e8f43e45ed9520d21d2bd69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae638ef2b4e8f43e45ed9520d21d2bd69">&#9670;&#160;</a></span>SignPDF()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool PDFSignerApp::Helpers::CryptographicsHelper::SignPDF </td>
+          <td>(</td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>pdfPath</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>privateKeyPath</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>pin</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">out string</td>          <td class="paramname"><span class="paramname"><em>message</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Signs a PDF file and saves it. <em>pdfPath</em>  is the path to the PDF file to be signed. <em>privateKeyPath</em>  is the path to the encrypted private key file. <em>pin</em>  is used to decrypt the private key. <em>message</em>  is an output parameter that will contain the result message of the signing operation. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if the signing operation was successful, False otherwise. </dd></dl>
+<p>The signed pdf file will be places in the same directory as the original pdf, and will be named <em>original_name</em>_signed.pdf </p>
+
+</div>
+</div>
+<a id="a959cc6ac88b1efa19738903e8424db00" name="a959cc6ac88b1efa19738903e8424db00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a959cc6ac88b1efa19738903e8424db00">&#9670;&#160;</a></span>VerifyPDFSignature()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool PDFSignerApp::Helpers::CryptographicsHelper::VerifyPDFSignature </td>
+          <td>(</td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>signedPDFPath</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string</td>          <td class="paramname"><span class="paramname"><em>publicKeyPath</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">out string</td>          <td class="paramname"><span class="paramname"><em>message</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Verifies a signed PDF file. <em>signedPDFPath</em>  is the path to the PDF file which should be verified. <em>publicKeyPath</em>  is the path to the public key file. <em>message</em>  is an output parameter that will contain the result message of the verification. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if the PDF file is authentic, False otherwise. </dd></dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>PDFSignerApp2/Helpers/<b>CryptographicsHelper.cs</b></li>
 </ul>
 </div><!-- contents -->

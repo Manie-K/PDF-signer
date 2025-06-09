@@ -1,5 +1,10 @@
 \doxysection{Key\+Generator\+App\+::Helpers\+::Relay\+Command Class Reference}
 \hypertarget{class_key_generator_app_1_1_helpers_1_1_relay_command}{}\label{class_key_generator_app_1_1_helpers_1_1_relay_command}\index{KeyGeneratorApp::Helpers::RelayCommand@{KeyGeneratorApp::Helpers::RelayCommand}}
+
+
+A command that can be bound to UI elements, allowing for execution of actions with optional conditions.  
+
+
 Inheritance diagram for Key\+Generator\+App\+::Helpers\+::Relay\+Command\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -11,13 +16,12 @@ Inheritance diagram for Key\+Generator\+App\+::Helpers\+::Relay\+Command\+:\begi
 \item 
 \Hypertarget{class_key_generator_app_1_1_helpers_1_1_relay_command_a4925bc2088bd36879c3dd85e3162b153}\label{class_key_generator_app_1_1_helpers_1_1_relay_command_a4925bc2088bd36879c3dd85e3162b153} 
 {\bfseries Relay\+Command} (Action execute, Func$<$ bool $>$ can\+Execute)
-\item 
-\Hypertarget{class_key_generator_app_1_1_helpers_1_1_relay_command_a4cd31520e3d9a1e45a9b4cbb81295939}\label{class_key_generator_app_1_1_helpers_1_1_relay_command_a4cd31520e3d9a1e45a9b4cbb81295939} 
-bool {\bfseries Can\+Execute} (object? parameter)
-\item 
+\begin{DoxyCompactList}\small\item\em Consturctor for \doxylink{class_key_generator_app_1_1_helpers_1_1_relay_command}{Relay\+Command} that takes an action to execute and a function to determine if it can execute. {\itshape can\+Execute}  Represents a function that returns a boolean indicating whether the command can execute. {\itshape execute}  Represents the action to execute when the command is invoked. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_key_generator_app_1_1_helpers_1_1_relay_command_a4cd31520e3d9a1e45a9b4cbb81295939}{Can\+Execute}} (object? parameter)
+\begin{DoxyCompactList}\small\item\em Tests whether the command can execute in its current state. \end{DoxyCompactList}\item 
 \Hypertarget{class_key_generator_app_1_1_helpers_1_1_relay_command_a9eb1377d360e5c3a14cc177c55393233}\label{class_key_generator_app_1_1_helpers_1_1_relay_command_a9eb1377d360e5c3a14cc177c55393233} 
 void {\bfseries Execute} (object? parameter)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Executes the command. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -26,6 +30,29 @@ event Event\+Handler \mbox{\hyperlink{class_key_generator_app_1_1_helpers_1_1_re
 \Hypertarget{class_key_generator_app_1_1_helpers_1_1_relay_command_ac48062d10d0eb2fddb0e1529b6e9dcae}\label{class_key_generator_app_1_1_helpers_1_1_relay_command_ac48062d10d0eb2fddb0e1529b6e9dcae} 
 {\bfseries remove} =$>$ Command\+Manager.\+Requery\+Suggested -\/= value
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A command that can be bound to UI elements, allowing for execution of actions with optional conditions. 
+
+Buttons in \doxylink{class_key_generator_app_1_1_main_window}{Main\+Window} view. 
+
+\label{doc-func-members}
+\Hypertarget{class_key_generator_app_1_1_helpers_1_1_relay_command_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_key_generator_app_1_1_helpers_1_1_relay_command_a4cd31520e3d9a1e45a9b4cbb81295939}\index{KeyGeneratorApp::Helpers::RelayCommand@{KeyGeneratorApp::Helpers::RelayCommand}!CanExecute@{CanExecute}}
+\index{CanExecute@{CanExecute}!KeyGeneratorApp::Helpers::RelayCommand@{KeyGeneratorApp::Helpers::RelayCommand}}
+\doxysubsubsection{\texorpdfstring{CanExecute()}{CanExecute()}}
+{\footnotesize\ttfamily \label{class_key_generator_app_1_1_helpers_1_1_relay_command_a4cd31520e3d9a1e45a9b4cbb81295939} 
+bool Key\+Generator\+App\+::\+Helpers\+::\+Relay\+Command\+::\+Can\+Execute (\begin{DoxyParamCaption}\item[{object?}]{parameter}{}\end{DoxyParamCaption})}
+
+
+
+Tests whether the command can execute in its current state. 
+
+\begin{DoxyReturn}{Returns}
+True if command can execute, False otherwise. 
+\end{DoxyReturn}
 
 
 \label{doc-variable-members}

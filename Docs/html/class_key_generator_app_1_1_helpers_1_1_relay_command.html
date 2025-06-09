@@ -92,6 +92,9 @@ $(function(){initNavTree('class_key_generator_app_1_1_helpers_1_1_relay_command.
   <div class="headertitle"><div class="title">KeyGeneratorApp::Helpers::RelayCommand Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>A command that can be bound to UI elements, allowing for execution of actions with optional conditions.  
+ <a href="#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for KeyGeneratorApp::Helpers::RelayCommand:</div>
 <div class="dyncontent">
@@ -103,10 +106,12 @@ Inheritance diagram for KeyGeneratorApp::Helpers::RelayCommand:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a4925bc2088bd36879c3dd85e3162b153" id="r_a4925bc2088bd36879c3dd85e3162b153"><td class="memItemLeft" align="right" valign="top"><a id="a4925bc2088bd36879c3dd85e3162b153" name="a4925bc2088bd36879c3dd85e3162b153"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>RelayCommand</b> (Action execute, Func&lt; bool &gt; canExecute)</td></tr>
-<tr class="memitem:a4cd31520e3d9a1e45a9b4cbb81295939" id="r_a4cd31520e3d9a1e45a9b4cbb81295939"><td class="memItemLeft" align="right" valign="top"><a id="a4cd31520e3d9a1e45a9b4cbb81295939" name="a4cd31520e3d9a1e45a9b4cbb81295939"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>CanExecute</b> (object? parameter)</td></tr>
+<tr class="memdesc:a4925bc2088bd36879c3dd85e3162b153"><td class="mdescLeft">&#160;</td><td class="mdescRight">Consturctor for <a class="el" href="class_key_generator_app_1_1_helpers_1_1_relay_command.html" title="A command that can be bound to UI elements, allowing for execution of actions with optional condition...">RelayCommand</a> that takes an action to execute and a function to determine if it can execute. <em>canExecute</em>  Represents a function that returns a boolean indicating whether the command can execute. <em>execute</em>  Represents the action to execute when the command is invoked. <br /></td></tr>
+<tr class="memitem:a4cd31520e3d9a1e45a9b4cbb81295939" id="r_a4cd31520e3d9a1e45a9b4cbb81295939"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4cd31520e3d9a1e45a9b4cbb81295939">CanExecute</a> (object? parameter)</td></tr>
+<tr class="memdesc:a4cd31520e3d9a1e45a9b4cbb81295939"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tests whether the command can execute in its current state.  <br /></td></tr>
 <tr class="memitem:a9eb1377d360e5c3a14cc177c55393233" id="r_a9eb1377d360e5c3a14cc177c55393233"><td class="memItemLeft" align="right" valign="top"><a id="a9eb1377d360e5c3a14cc177c55393233" name="a9eb1377d360e5c3a14cc177c55393233"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>Execute</b> (object? parameter)</td></tr>
+<tr class="memdesc:a9eb1377d360e5c3a14cc177c55393233"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes the command. <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -114,6 +119,30 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:ac48062d10d0eb2fddb0e1529b6e9dcae" id="r_ac48062d10d0eb2fddb0e1529b6e9dcae"><td class="memItemLeft" align="right" valign="top"><a id="ac48062d10d0eb2fddb0e1529b6e9dcae" name="ac48062d10d0eb2fddb0e1529b6e9dcae"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>remove</b> =&gt; CommandManager.RequerySuggested -= value</td></tr>
 </table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A command that can be bound to UI elements, allowing for execution of actions with optional conditions. </p>
+<p>Buttons in <a class="el" href="class_key_generator_app_1_1_main_window.html" title="View for the main window of the Key Generator application.">MainWindow</a> view. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a4cd31520e3d9a1e45a9b4cbb81295939" name="a4cd31520e3d9a1e45a9b4cbb81295939"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4cd31520e3d9a1e45a9b4cbb81295939">&#9670;&#160;</a></span>CanExecute()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool KeyGeneratorApp::Helpers::RelayCommand::CanExecute </td>
+          <td>(</td>
+          <td class="paramtype">object?</td>          <td class="paramname"><span class="paramname"><em>parameter</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Tests whether the command can execute in its current state. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if command can execute, False otherwise. </dd></dl>
+
+</div>
+</div>
 <a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
 <a id="ad326983bffcf0845abb8d11127035713" name="ad326983bffcf0845abb8d11127035713"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad326983bffcf0845abb8d11127035713">&#9670;&#160;</a></span>CanExecuteChanged</h2>

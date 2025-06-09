@@ -23,6 +23,8 @@ var hierarchy =
       [ "PDFSignerApp::MainWindow", "class_p_d_f_signer_app_1_1_main_window.html", null ],
       [ "PDFSignerApp::PDFSignView", "class_p_d_f_signer_app_1_1_p_d_f_sign_view.html", null ],
       [ "PDFSignerApp::PDFSignView", "class_p_d_f_signer_app_1_1_p_d_f_sign_view.html", null ],
+      [ "PDFSignerApp::PDFSignView", "class_p_d_f_signer_app_1_1_p_d_f_sign_view.html", null ],
+      [ "PDFSignerApp::PDFVerifyView", "class_p_d_f_signer_app_1_1_p_d_f_verify_view.html", null ],
       [ "PDFSignerApp::PDFVerifyView", "class_p_d_f_signer_app_1_1_p_d_f_verify_view.html", null ],
       [ "PDFSignerApp::PDFVerifyView", "class_p_d_f_signer_app_1_1_p_d_f_verify_view.html", null ]
     ] ],
@@ -37,11 +39,13 @@ var hierarchy =
     [ "ObservableObject", null, [
       [ "PDFSignerApp::MainViewModel", "class_p_d_f_signer_app_1_1_main_view_model.html", null ],
       [ "PDFSignerApp::PDFSignViewModel", "class_p_d_f_signer_app_1_1_p_d_f_sign_view_model.html", null ],
-      [ "PDFSignerApp::PDFVerifyViewModel", "class_p_d_f_signer_app_1_1_p_d_f_verify_view_model.html", null ]
+      [ "PDFSignerApp::PDFVerify::PDFVerifyViewModel", "class_p_d_f_signer_app_1_1_p_d_f_verify_1_1_p_d_f_verify_view_model.html", null ]
     ] ],
     [ "System::Windows::Controls::UserControl", null, [
       [ "PDFSignerApp::PDFSignView", "class_p_d_f_signer_app_1_1_p_d_f_sign_view.html", null ],
       [ "PDFSignerApp::PDFSignView", "class_p_d_f_signer_app_1_1_p_d_f_sign_view.html", null ],
+      [ "PDFSignerApp::PDFSignView", "class_p_d_f_signer_app_1_1_p_d_f_sign_view.html", null ],
+      [ "PDFSignerApp::PDFVerifyView", "class_p_d_f_signer_app_1_1_p_d_f_verify_view.html", null ],
       [ "PDFSignerApp::PDFVerifyView", "class_p_d_f_signer_app_1_1_p_d_f_verify_view.html", null ],
       [ "PDFSignerApp::PDFVerifyView", "class_p_d_f_signer_app_1_1_p_d_f_verify_view.html", null ]
     ] ],

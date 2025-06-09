@@ -1,5 +1,10 @@
 \doxysection{Key\+Generator\+App\+::Helpers\+::Observable\+Object Class Reference}
 \hypertarget{class_key_generator_app_1_1_helpers_1_1_observable_object}{}\label{class_key_generator_app_1_1_helpers_1_1_observable_object}\index{KeyGeneratorApp::Helpers::ObservableObject@{KeyGeneratorApp::Helpers::ObservableObject}}
+
+
+Base class for objects that implement property change notification.  
+
+
 Inheritance diagram for Key\+Generator\+App\+::Helpers\+::Observable\+Object\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -11,7 +16,7 @@ Inheritance diagram for Key\+Generator\+App\+::Helpers\+::Observable\+Object\+:\
 \item 
 \Hypertarget{class_key_generator_app_1_1_helpers_1_1_observable_object_aada81d96b8a6ce3ce237ed7f768a9429}\label{class_key_generator_app_1_1_helpers_1_1_observable_object_aada81d96b8a6ce3ce237ed7f768a9429} 
 event Property\+Changed\+Event\+Handler {\bfseries Property\+Changed}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Notifies subscribers that a property value has changed. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -19,6 +24,11 @@ event Property\+Changed\+Event\+Handler {\bfseries Property\+Changed}
 virtual void {\bfseries On\+Property\+Changed} (\mbox{[}Caller\+Member\+Name\mbox{]} string? property\+Name=null)
 \end{DoxyCompactItemize}
 
+
+\doxysubsection{Detailed Description}
+Base class for objects that implement property change notification. 
+
+Main\+View\+Model inherits from \doxylink{class_key_generator_app_1_1_helpers_1_1_observable_object}{Observable\+Object} to notify the view of property changes. 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

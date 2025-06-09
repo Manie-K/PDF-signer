@@ -92,6 +92,9 @@ $(function(){initNavTree('class_p_d_f_signer_app_1_1_p_d_f_sign_view_model.html'
   <div class="headertitle"><div class="title">PDFSignerApp::PDFSignViewModel Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>ViewModel for signing PDF files with a digital signature.  
+ <a href="#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for PDFSignerApp::PDFSignViewModel:</div>
 <div class="dyncontent">
@@ -103,13 +106,19 @@ Inheritance diagram for PDFSignerApp::PDFSignViewModel:</div>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a3b48a0e512a7a551e9ac2e6fbb271a39" id="r_a3b48a0e512a7a551e9ac2e6fbb271a39"><td class="memItemLeft" align="right" valign="top"><a id="a3b48a0e512a7a551e9ac2e6fbb271a39" name="a3b48a0e512a7a551e9ac2e6fbb271a39"></a>
 event Action&lt; System.Windows.Media.Brush &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>OnMessageColorChanged</b></td></tr>
+<tr class="memdesc:a3b48a0e512a7a551e9ac2e6fbb271a39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Event triggered when the message color is changed. <br /></td></tr>
 <tr class="memitem:a3e250d2943ec3385ee05a2960da68387" id="r_a3e250d2943ec3385ee05a2960da68387"><td class="memItemLeft" align="right" valign="top"><a id="a3e250d2943ec3385ee05a2960da68387" name="a3e250d2943ec3385ee05a2960da68387"></a>
 RelayCommand&#160;</td><td class="memItemRight" valign="bottom"><b>SignPDFCommand</b> { get</td></tr>
+<tr class="memdesc:a3e250d2943ec3385ee05a2960da68387"><td class="mdescLeft">&#160;</td><td class="mdescRight">RelayCommand for signing the PDF file. <br /></td></tr>
 <tr class="memitem:aee8f7948e3374f8daa462428385b6c75" id="r_aee8f7948e3374f8daa462428385b6c75"><td class="memItemLeft" align="right" valign="top"><a id="aee8f7948e3374f8daa462428385b6c75" name="aee8f7948e3374f8daa462428385b6c75"></a>
 RelayCommand&#160;</td><td class="memItemRight" valign="bottom"><b>SelectPDFCommand</b> { get</td></tr>
+<tr class="memdesc:aee8f7948e3374f8daa462428385b6c75"><td class="mdescLeft">&#160;</td><td class="mdescRight">RelayCommand for selecting the PDF file to be signed."/&gt; <br /></td></tr>
 <tr class="memitem:a7818eeb2f7c8ac7a6cd34f9ae0f0dea3" id="r_a7818eeb2f7c8ac7a6cd34f9ae0f0dea3"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7818eeb2f7c8ac7a6cd34f9ae0f0dea3">Pin</a></td></tr>
+<tr class="memdesc:a7818eeb2f7c8ac7a6cd34f9ae0f0dea3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the PIN used in encryption of private key.  <br /></td></tr>
 </table>
-<a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>ViewModel for signing PDF files with a digital signature. </p>
+</div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
 <a id="a7818eeb2f7c8ac7a6cd34f9ae0f0dea3" name="a7818eeb2f7c8ac7a6cd34f9ae0f0dea3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7818eeb2f7c8ac7a6cd34f9ae0f0dea3">&#9670;&#160;</a></span>Pin</h2>
 
@@ -124,10 +133,12 @@ RelayCommand&#160;</td><td class="memItemRight" valign="bottom"><b>SelectPDFComm
 <b>Initial value:</b><div class="fragment"><div class="line">{</div>
 <div class="line">            get =&gt; _pin</div>
 </div><!-- fragment -->
+<p>Represents the PIN used in encryption of private key. </p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>PDFSignerApp2/<b>PDFSignViewModel.cs</b></li>
+<li>PDFSignerApp2/PDFSign/<b>PDFSignViewModel.cs</b></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

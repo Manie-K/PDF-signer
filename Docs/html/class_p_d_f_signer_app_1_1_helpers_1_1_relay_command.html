@@ -92,6 +92,9 @@ $(function(){initNavTree('class_p_d_f_signer_app_1_1_helpers_1_1_relay_command.h
   <div class="headertitle"><div class="title">PDFSignerApp::Helpers::RelayCommand Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>A command that can be bound to UI elements, allowing for execution of actions with optional conditions.  
+ <a href="#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for PDFSignerApp::Helpers::RelayCommand:</div>
 <div class="dyncontent">
@@ -103,10 +106,12 @@ Inheritance diagram for PDFSignerApp::Helpers::RelayCommand:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a25ffddf2225455742e455088968d825b" id="r_a25ffddf2225455742e455088968d825b"><td class="memItemLeft" align="right" valign="top"><a id="a25ffddf2225455742e455088968d825b" name="a25ffddf2225455742e455088968d825b"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>RelayCommand</b> (Action execute, Func&lt; bool &gt; canExecute)</td></tr>
-<tr class="memitem:a77db33834fb1ced3a655a056a466b3b2" id="r_a77db33834fb1ced3a655a056a466b3b2"><td class="memItemLeft" align="right" valign="top"><a id="a77db33834fb1ced3a655a056a466b3b2" name="a77db33834fb1ced3a655a056a466b3b2"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>CanExecute</b> (object? parameter)</td></tr>
+<tr class="memdesc:a25ffddf2225455742e455088968d825b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Consturctor for <a class="el" href="class_p_d_f_signer_app_1_1_helpers_1_1_relay_command.html" title="A command that can be bound to UI elements, allowing for execution of actions with optional condition...">RelayCommand</a> that takes an action to execute and a function to determine if it can execute. <em>canExecute</em>  Represents a function that returns a boolean indicating whether the command can execute. <em>execute</em>  Represents the action to execute when the command is invoked. <br /></td></tr>
+<tr class="memitem:a77db33834fb1ced3a655a056a466b3b2" id="r_a77db33834fb1ced3a655a056a466b3b2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a77db33834fb1ced3a655a056a466b3b2">CanExecute</a> (object? parameter)</td></tr>
+<tr class="memdesc:a77db33834fb1ced3a655a056a466b3b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tests whether the command can execute in its current state.  <br /></td></tr>
 <tr class="memitem:a942d39efbe8e0ce0b69dab1e9e842c0d" id="r_a942d39efbe8e0ce0b69dab1e9e842c0d"><td class="memItemLeft" align="right" valign="top"><a id="a942d39efbe8e0ce0b69dab1e9e842c0d" name="a942d39efbe8e0ce0b69dab1e9e842c0d"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>Execute</b> (object? parameter)</td></tr>
+<tr class="memdesc:a942d39efbe8e0ce0b69dab1e9e842c0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes the command. <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -114,6 +119,30 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a96efb299daffad911ea3dc54f9c97b5f" id="r_a96efb299daffad911ea3dc54f9c97b5f"><td class="memItemLeft" align="right" valign="top"><a id="a96efb299daffad911ea3dc54f9c97b5f" name="a96efb299daffad911ea3dc54f9c97b5f"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>remove</b> =&gt; CommandManager.RequerySuggested -= value</td></tr>
 </table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A command that can be bound to UI elements, allowing for execution of actions with optional conditions. </p>
+<p>Buttons in <a class="el" href="class_p_d_f_signer_app_1_1_p_d_f_sign_view.html" title="PDFSignView.">PDFSignView</a> view. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a77db33834fb1ced3a655a056a466b3b2" name="a77db33834fb1ced3a655a056a466b3b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77db33834fb1ced3a655a056a466b3b2">&#9670;&#160;</a></span>CanExecute()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool PDFSignerApp::Helpers::RelayCommand::CanExecute </td>
+          <td>(</td>
+          <td class="paramtype">object?</td>          <td class="paramname"><span class="paramname"><em>parameter</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Tests whether the command can execute in its current state. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if command can execute, False otherwise. </dd></dl>
+
+</div>
+</div>
 <a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
 <a id="adc62f41126e2fada789c5a7aabc2621f" name="adc62f41126e2fada789c5a7aabc2621f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adc62f41126e2fada789c5a7aabc2621f">&#9670;&#160;</a></span>CanExecuteChanged</h2>

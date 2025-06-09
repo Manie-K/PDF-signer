@@ -5,7 +5,7 @@
 %%For: 
 %Magnification: 1.00
 %%Orientation: Portrait
-%%BoundingBox: 0 0 500 27.027027
+%%BoundingBox: 0 0 500 19.305019
 %%Pages: 0
 %%BeginSetup
 %%EndSetup
@@ -19,13 +19,13 @@
 /marginwidth 10 def
 /distx 20 def
 /disty 40 def
-/boundaspect 18.500000 def  % aspect ratio of the BoundingBox (width/height)
+/boundaspect 25.900000 def  % aspect ratio of the BoundingBox (width/height)
 /boundx 500 def
 /boundy boundx boundaspect div def
 /xspacing 0 def
 /yspacing 0 def
 /rows 2 def
-/cols 5 def
+/cols 7 def
 /scalefactor 0 def
 /boxfont /Times-Roman findfont fontheight scalefont def
 
@@ -178,6 +178,8 @@ boxfont setfont
 (System::Windows::Markup::IComponentConnector) cw
 (System::Windows::Controls::UserControl) cw
 (System::Windows::Markup::IComponentConnector) cw
+(System::Windows::Controls::UserControl) cw
+(System::Windows::Markup::IComponentConnector) cw
 (UserControl) cw
 /boxwidth boxwidth marginwidth 2 mul add def
 /xspacing boxwidth distx add def
@@ -190,19 +192,21 @@ boundx scalefactor div boundy scalefactor div scale
 
 % ----- classes -----
 
- (PDFSignerApp::PDFVerifyView) 2.000000 0.000000 box
+ (PDFSignerApp::PDFVerifyView) 3.000000 0.000000 box
  (System::Windows::Controls::UserControl) 0.000000 1.000000 box
  (System::Windows::Markup::IComponentConnector) 1.000000 1.000000 box
  (System::Windows::Controls::UserControl) 2.000000 1.000000 box
  (System::Windows::Markup::IComponentConnector) 3.000000 1.000000 box
- (UserControl) 4.000000 1.000000 box
+ (System::Windows::Controls::UserControl) 4.000000 1.000000 box
+ (System::Windows::Markup::IComponentConnector) 5.000000 1.000000 box
+ (UserControl) 6.000000 1.000000 box
 
 % ----- relations -----
 
 dotted
-0 2.000000 0.000000 out
+0 3.000000 0.000000 out
 dotted
-0.000000 4.000000 1.000000 conn
+0.000000 6.000000 1.000000 conn
 dotted
 1 0.000000 1.000000 in
 dotted
@@ -213,3 +217,7 @@ dotted
 1 3.000000 1.000000 in
 dotted
 1 4.000000 1.000000 in
+dotted
+1 5.000000 1.000000 in
+dotted
+1 6.000000 1.000000 in

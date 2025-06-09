@@ -1,14 +1,20 @@
 \doxysection{PDFSigner\+App\+::Helpers\+::Cryptographics\+Helper Class Reference}
 \hypertarget{class_p_d_f_signer_app_1_1_helpers_1_1_cryptographics_helper}{}\label{class_p_d_f_signer_app_1_1_helpers_1_1_cryptographics_helper}\index{PDFSignerApp::Helpers::CryptographicsHelper@{PDFSignerApp::Helpers::CryptographicsHelper}}
+
+
+Helper class for cryptographic operations related to PDF signing and verification.  
+
+
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{class_p_d_f_signer_app_1_1_helpers_1_1_cryptographics_helper_ae638ef2b4e8f43e45ed9520d21d2bd69}\label{class_p_d_f_signer_app_1_1_helpers_1_1_cryptographics_helper_ae638ef2b4e8f43e45ed9520d21d2bd69} 
-bool {\bfseries Sign\+PDF} (string pdf\+Path, string private\+Key\+Path, string pin, out string message)
-\item 
-\Hypertarget{class_p_d_f_signer_app_1_1_helpers_1_1_cryptographics_helper_a959cc6ac88b1efa19738903e8424db00}\label{class_p_d_f_signer_app_1_1_helpers_1_1_cryptographics_helper_a959cc6ac88b1efa19738903e8424db00} 
-bool {\bfseries Verify\+PDFSignature} (string signed\+PDFPath, string public\+Key\+Path, out string message)
-\item 
+\Hypertarget{class_p_d_f_signer_app_1_1_helpers_1_1_cryptographics_helper_add49797fb7c86de74c5738bdcac31932}\label{class_p_d_f_signer_app_1_1_helpers_1_1_cryptographics_helper_add49797fb7c86de74c5738bdcac31932} 
+{\bfseries Cryptographics\+Helper} ()
+\begin{DoxyCompactList}\small\item\em Parameterless constructor for \doxylink{class_p_d_f_signer_app_1_1_helpers_1_1_cryptographics_helper}{Cryptographics\+Helper}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_p_d_f_signer_app_1_1_helpers_1_1_cryptographics_helper_ae638ef2b4e8f43e45ed9520d21d2bd69}{Sign\+PDF}} (string pdf\+Path, string private\+Key\+Path, string pin, out string message)
+\begin{DoxyCompactList}\small\item\em Signs a PDF file and saves it. {\itshape pdf\+Path}  is the path to the PDF file to be signed. {\itshape private\+Key\+Path}  is the path to the encrypted private key file. {\itshape pin}  is used to decrypt the private key. {\itshape message}  is an output parameter that will contain the result message of the signing operation. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_p_d_f_signer_app_1_1_helpers_1_1_cryptographics_helper_a959cc6ac88b1efa19738903e8424db00}{Verify\+PDFSignature}} (string signed\+PDFPath, string public\+Key\+Path, out string message)
+\begin{DoxyCompactList}\small\item\em Verifies a signed PDF file. {\itshape signed\+PDFPath}  is the path to the PDF file which should be verified. {\itshape public\+Key\+Path}  is the path to the public key file. {\itshape message}  is an output parameter that will contain the result message of the verification. \end{DoxyCompactList}\item 
 \Hypertarget{class_p_d_f_signer_app_1_1_helpers_1_1_cryptographics_helper_a7bfe4dc3a88734ea44edd8d8cbee1cac}\label{class_p_d_f_signer_app_1_1_helpers_1_1_cryptographics_helper_a7bfe4dc3a88734ea44edd8d8cbee1cac} 
 internal byte\mbox{[}$\,$\mbox{]} {\bfseries Decrypt\+Private\+Key} (byte\mbox{[}$\,$\mbox{]} encrypted\+Private\+Key, byte\mbox{[}$\,$\mbox{]} salt, byte\mbox{[}$\,$\mbox{]} iv, string pin, out string message)
 \end{DoxyCompactItemize}
@@ -16,6 +22,39 @@ internal byte\mbox{[}$\,$\mbox{]} {\bfseries Decrypt\+Private\+Key} (byte\mbox{[
 
 \doxysubsection{Detailed Description}
 Helper class for cryptographic operations related to PDF signing and verification. 
+
+\label{doc-func-members}
+\Hypertarget{class_p_d_f_signer_app_1_1_helpers_1_1_cryptographics_helper_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_p_d_f_signer_app_1_1_helpers_1_1_cryptographics_helper_ae638ef2b4e8f43e45ed9520d21d2bd69}\index{PDFSignerApp::Helpers::CryptographicsHelper@{PDFSignerApp::Helpers::CryptographicsHelper}!SignPDF@{SignPDF}}
+\index{SignPDF@{SignPDF}!PDFSignerApp::Helpers::CryptographicsHelper@{PDFSignerApp::Helpers::CryptographicsHelper}}
+\doxysubsubsection{\texorpdfstring{SignPDF()}{SignPDF()}}
+{\footnotesize\ttfamily \label{class_p_d_f_signer_app_1_1_helpers_1_1_cryptographics_helper_ae638ef2b4e8f43e45ed9520d21d2bd69} 
+bool PDFSigner\+App\+::\+Helpers\+::\+Cryptographics\+Helper\+::\+Sign\+PDF (\begin{DoxyParamCaption}\item[{string}]{pdf\+Path}{, }\item[{string}]{private\+Key\+Path}{, }\item[{string}]{pin}{, }\item[{out string}]{message}{}\end{DoxyParamCaption})}
+
+
+
+Signs a PDF file and saves it. {\itshape pdf\+Path}  is the path to the PDF file to be signed. {\itshape private\+Key\+Path}  is the path to the encrypted private key file. {\itshape pin}  is used to decrypt the private key. {\itshape message}  is an output parameter that will contain the result message of the signing operation. 
+
+\begin{DoxyReturn}{Returns}
+True if the signing operation was successful, False otherwise. 
+\end{DoxyReturn}
+
+
+The signed pdf file will be places in the same directory as the original pdf, and will be named {\itshape original\+\_\+name}\+\_\+signed.\+pdf \Hypertarget{class_p_d_f_signer_app_1_1_helpers_1_1_cryptographics_helper_a959cc6ac88b1efa19738903e8424db00}\index{PDFSignerApp::Helpers::CryptographicsHelper@{PDFSignerApp::Helpers::CryptographicsHelper}!VerifyPDFSignature@{VerifyPDFSignature}}
+\index{VerifyPDFSignature@{VerifyPDFSignature}!PDFSignerApp::Helpers::CryptographicsHelper@{PDFSignerApp::Helpers::CryptographicsHelper}}
+\doxysubsubsection{\texorpdfstring{VerifyPDFSignature()}{VerifyPDFSignature()}}
+{\footnotesize\ttfamily \label{class_p_d_f_signer_app_1_1_helpers_1_1_cryptographics_helper_a959cc6ac88b1efa19738903e8424db00} 
+bool PDFSigner\+App\+::\+Helpers\+::\+Cryptographics\+Helper\+::\+Verify\+PDFSignature (\begin{DoxyParamCaption}\item[{string}]{signed\+PDFPath}{, }\item[{string}]{public\+Key\+Path}{, }\item[{out string}]{message}{}\end{DoxyParamCaption})}
+
+
+
+Verifies a signed PDF file. {\itshape signed\+PDFPath}  is the path to the PDF file which should be verified. {\itshape public\+Key\+Path}  is the path to the public key file. {\itshape message}  is an output parameter that will contain the result message of the verification. 
+
+\begin{DoxyReturn}{Returns}
+True if the PDF file is authentic, False otherwise. 
+\end{DoxyReturn}
+
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
