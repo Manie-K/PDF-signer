@@ -7,6 +7,7 @@ namespace PDFSignerApp.Helpers
 {
     public class CryptographicsHelper
     {
+        const int SignatureBytesCount = 512;
         public CryptographicsHelper()
         {
 
@@ -79,13 +80,11 @@ namespace PDFSignerApp.Helpers
                 string originalFileNameWithoutExtension = Path.GetFileNameWithoutExtension(pdfPath);
                 string signedPath = Path.Combine(originalPath, originalFileNameWithoutExtension + "_signed.pdf");
 
-                string signatureAsString = Convert.ToBase64String(signature);
-
-                using (PdfReader reader = new PdfReader(pdfPath))
-                using (PdfWriter writer = new PdfWriter(signedPath))
-                {
-                    // Tu trzeba podziałać
-                }
+                byte[] combinedBytes = new byte[pdfBytes.Length + signature.Length];
+                Buffer.BlockCopy(pdfBytes, 0, combinedBytes, 0, pdfBytes.Length);
+                Buffer.BlockCopy(signature, 0, combinedBytes, pdfBytes.Length, signature.Length);
+                
+                File.WriteAllBytes(signedPath, combinedBytes);
 
                 message = "PDF signed successfully!";
                 return true;
@@ -97,51 +96,65 @@ namespace PDFSignerApp.Helpers
             }
         }
 
-        public bool VerifyPDFSignature(string pdfPath, string publicKeyPath, out string message)
+        public bool VerifyPDFSignature(string signedPDFPath, string publicKeyPath, out string message)
         {
             // 1. Read the signed PDF file
-            // 2. Extract the signature from the PDF
-            // 3. Extract the unsigned PDF content
-            // 4. Compute SHA256 hash of the unsigned PDF content
-            // 5. Verify the signature using the public key and the hash
-            // 6. Return the verification result
+            // 2. Calculate the length of the byte areas
+            // 3. Extract the signature from the PDF
+            // 4. Extract the unsigned PDF content
+            // 5. Compute SHA256 hash of the unsigned PDF content
+            // 6. Verify the signature using the public key and the hash
+            // 7. Return the verification result
 
             try
             {
-                string base64Signature;
-
                 // 1. Read the signed PDF file
 
+                byte[] pdfBytes = File.ReadAllBytes(signedPDFPath);
 
 
+                // 2. Calculate the length of the byte areas
 
-                // 2. Extract the signature from the PDF
-
-
-
-
-                // 3. Extract the unsigned PDF content
-
-
-
-
-                // 4. Compute SHA256 hash of the unsigned PDF content
+                int signatureStartIndex = pdfBytes.Length - SignatureBytesCount;
+                int pdfContentSize = pdfBytes.Length - SignatureBytesCount;
+                if (signatureStartIndex < 0)
+                {
+                    message = "Invalid signed PDF file.";
+                    return false;
+                }
 
 
+                // 3. Extract the signature from the PDF
 
 
+                byte[] signatureBytes = new byte[SignatureBytesCount];
+                Array.Copy(pdfBytes, signatureStartIndex, signatureBytes, 0, SignatureBytesCount);
 
-                // 5. Verify the signature using the public key and the hash
+                // 4. Extract the unsigned PDF content
 
-                byte[] signature = Convert.FromBase64String(base64Signature);
+                byte[] pdfContent = new byte[pdfContentSize];
+                Array.Copy(pdfBytes, 0, pdfContent, 0, pdfContentSize);
+
+
+                // 5. Compute SHA256 hash of the unsigned PDF content
+
+                byte[] hash;
+                using (SHA256 sha256 = SHA256.Create())
+                {
+                    hash = sha256.ComputeHash(pdfContent);
+                }
+
+
+                // 6. Verify the signature using the public key and the hash
+
                 byte[] publicKeyBytes = File.ReadAllBytes(publicKeyPath);
                 RSA rsa = RSA.Create();
                 rsa.ImportSubjectPublicKeyInfo(publicKeyBytes, out _);
 
-                bool isValid = rsa.VerifyHash(hash, signature, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+                bool isValid = rsa.VerifyHash(hash, signatureBytes, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
 
 
-                // 6. Return the verification result
+                // 7. Return the verification result
 
                 if (isValid)
                 {
