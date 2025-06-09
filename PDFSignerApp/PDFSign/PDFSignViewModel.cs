@@ -9,7 +9,7 @@ using PDFSignerApp.Helpers;
 using System.Management;
 using System.Linq.Expressions;
 
-namespace PDFSignerApp
+namespace PDFSignerApp.PDFSign
 {
     /// <summary>
     /// ViewModel for signing PDF files with a digital signature.

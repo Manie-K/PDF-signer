@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using PDFSignerApp.Helpers;
+using PDFSignerApp.PDFSign;
+using PDFSignerApp.PDFVerify;
 
 namespace PDFSignerApp
 {

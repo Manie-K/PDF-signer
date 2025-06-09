@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PDFSignerApp2\PDFSignerApp.csproj" />
+    <ProjectReference Include="..\PDFSignerApp\PDFSignerApp.csproj" />
   </ItemGroup>
 
 </Project>
