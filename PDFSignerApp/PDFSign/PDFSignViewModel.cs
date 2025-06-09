@@ -1,13 +1,9 @@
-﻿using System.Diagnostics;
-using System.IO;
-using System.Security.Cryptography;
+﻿using System.IO;
 using System.Windows;
 using System.Windows.Media;
-using iText.Kernel.Pdf;
 using Microsoft.Win32;
 using PDFSignerApp.Helpers;
 using System.Management;
-using System.Linq.Expressions;
 
 namespace PDFSignerApp.PDFSign
 {

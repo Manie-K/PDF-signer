@@ -1,5 +1,4 @@
 ﻿using System.Security.Cryptography;
-using iText.Kernel.Pdf;
 using System.IO;
 using iText.Signatures;
 
