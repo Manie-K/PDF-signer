@@ -1,6 +1,5 @@
 ﻿using System.Security.Cryptography;
 using System.IO;
-using iText.Signatures;
 
 namespace PDFSignerApp.Helpers
 {
