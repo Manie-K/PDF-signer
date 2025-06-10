@@ -24,3 +24,10 @@ Documentation created by doxygen can be found here: "Docs/html/index.html"
 - *Reports/*        -> contains reports
 - *Docs/*           -> contains doxygen results
 - *Generated Keys/* -> contains example keys
+
+
+---
+## How to run
+1. Open PDF-Signer.sln
+2. Build solution
+3. Run exec file in {ProjectName}/bin/Debug/{verion}/*.exe
